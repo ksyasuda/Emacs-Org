@@ -1,0 +1,49 @@
+#+TITLE: P5R Warden Quests
+#+DATE: Tue Dec  1 18:27:07 2020  
+
+1. Jack Frost (Mabufu)
+    Jack Frost (with Mabufu) is a common Persona. Found in both the first Palace, or in the first floors of Mementos. Simply level up Jack Frost or combine two Personas to create Jack Frost to unlock.
+2. Shiisaa (Frei)
+    A trickier, but still common, Persona. Either use a Blank Card with Frei, or fuse a Persona with Frei, then fuse against to create Shiisaa, making sure to select Frei as the ability to carry-over.
+3. Matador (Magaru)
+    The first tricky Persona. To unlock him, fuse Mokoi and Regent — both found in Madarame’s Palace. Inherit the Magaru skill from Regent to unlock the Lockdown skill from
+4. Flauros (Tarukaja)
+    To create Flauros, you’ll need to complete an Advanced Fusion — an ability that is unlocked after showing the Strength Confidant Jack Frost (w/ Mabufu). To create Flauros, you’ll need to be Lvl. 25, and combine Andras, Berith, and Eligor.
+    
+    All three are found in Mementos. Eligor is the trickiest, but he can unlock Tarukaja. Make sure that Flauros inherits Tarukaja from Eligor when completing the Advanced Fusion.
+5. Ame-no-Uzume (Dodge Psy)
+    To create Ame-no-Uzume, you’ll need Sui-Ki and Kin-Ki. Both are found in the Bank Palace (3rd Palace), as well as any previous fusions you may need to create Sui-Ki / Kin-Ki.
+
+    Fuse Rakshasa and Yaksini to create Kin-Ki — then Strength or level-up Kin-Ki to Lvl. 27 to unlock Dodge Psy. Once you have Dodge Psy, combine both and inherit Dodge Psy to get the Amen-no-Uzume you need.
+6. Neko Shogun (Dekaja)
+    Neko Shogun is another Advanced Fusion, so you’ll need three Personas to unlock him: fuse Kodama, Sudama, and Anzu. Anzu is common in the 5th /6th level dungeon of Mementos or Futaba’s Palace. You’ll find many there — Kodama and Sudama require fusions to create.
+
+    To unlock Dekaja, strengthen Anzu to Lvl. 28 — that’s how to get Dekaja. Sudama and Kodama can be tricky to create, use the following simple fusions to acquire them.
+
+    To Get Kodama, Fuse: Angel + Obaryon / Berith + Agathion / Berith + Slime
+    To Get Sudama, Fuse: Oni + Slime / Suzaku + Andras / Nekomata + Mokoi
+7. Lachesis (Tetraja)
+    To create Lachesis, you’ll need to first create the Principality Persona and unlock the Tetraja skill. To get Principality, combine Archangel + Regent, or High Pixie + Kaguya. It starts with Tetraja.
+
+    Now that you have Principality with Tetraja, fuse with Yaksini (common) to get Ame-No-Uzume. Make sure to inherit Tetraja. Next, combine Ame-No-Uzume with Isis. Isis can be found in the Futaba Palace, or in the 5th / 6th tier dungeons of Mementos.
+
+    Combine Ame-No-Uzume (with Tetraja) and Isis to get Lachesis with Tetraja.
+8. Hecatoncheires (Masukunda)
+    To get Hecatoncheires with the Masukunda skill, you’ll first need to create the Unicorn Persona. Unicorn is a fairly common combination — fuse Sui Ki + Isis, Kin Ki + Isis, Anzu + Regent, Setanta + Naga to get a Unicorn.
+
+    Next, you’ll need the Lilim Persona. Fuse Mokoi + Kodama, Makami + Silky, Apsaras + Koppa Tengu, or just capture it on your own.
+
+    Combine Lilim and Unicorn, and inherit the Masukunda skill to unlock this powerful Persona.
+9. Bugs (Samarecharm)
+    Bugs is an Advanced Fusion, so you’ll need three Personas — Pixie, Pisaca, and Hariti. The only difficult Persona in that list is Hariti — Hariti at Lvl. 41 is Samarecharm.
+
+    Pixie is extremely common. Pisaca and Hariti are trickier to obtain, and you may need to fuse Personas to unlock them.
+
+    To Get Pisaca, Fuse: Matador + Regent / Isis + Angel /
+    To Get Hariti, Fuse: Queen’s Necklace + Yaksini / Principality + Fuu Ki / Setanta + Isis / Mothman + Suzaku
+10. Seth (High Counter)
+    The last required Persona is another Advanced Fusion. To create Seth, you’ll need to fuse — Horus, Anubis, and Isis. Anubis and Isis are available Personas in the 5th/6th depth dungeons of Mementos. Horus is the trickiest Persona in the combo.
+
+    To create Horus, you’ll need to fuse Yurlungur + Orlov / Ganesha + Queen’s Necklace / Hecatoncheir + Daisoujuou.
+
+    The tough part is getting High Counter. Complete the Mementos Request “The Killer Who Cleans Up Trash” around October. You’ll get the High Counter Skill Card as a reward. Apply High Counter to Seth to complete your Strength Confidant social-link.
