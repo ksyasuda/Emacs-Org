@@ -1,0 +1,76 @@
+#+TITLE: Scaling Dynamic Pages
+#+DATE: Wed Dec  9 20:53:50 2020 
+
+* server-side dynamic pages
+** what happens when two clientst make two requests at the same time
+*** one has to wait for the others to finish
+*** 1 server 1 process 1 request
+**** ex. flask dev server
+**** one response at a time
+*** 1 server 1 process 2 requests
+**** one server runs one process
+**** one has to wait for the req/res to finish
+** Solution
+*** multiple threads
+**** illusion of parallelism, still runs on one CPU
+*** asynchronous programming
+**** same as threads
+*** multiple processes on 1 CPU core
+**** still not good
+*** multiple processes on a multicore CPU
+**** 2 cores can do 2 things at once with 2 processes
+*** multiprocessing with multithreading or asynchronous programming the best we can get
+*** can't do multithreadding and asynchronous programming
+**** too much overhead
+** Round Robin DNS and load balancing
+*** special DNS server resoponds with different IP address each time, rotating between different servers
+*** rotating list of IP addresses
+*** doesn't consider server load, just sends in order
+** Load Balancer
+*** in between DNS and the servers
+*** directs requests to the lest busy active server
+*** if a server goes down the load balancer will notice that it is not there and not send anything to it
+** load balancing with round robin DNS
+*** two load balancers that handle disjoint sets of servers (or many)
+* Hardware Virtualization
+** Host: pysical computer running an OS and virtualization software
+** Guest: operating system(s) being run as "programs", not on dedicated physical hardware
+** Hypervisor: virtualization software runs guests on host
+*** VirtualBox, VMWare
+** Hardware emulation
+*** host shares physical resources like network, disks, etc
+** Advantages
+*** energy efficiency
+*** diverse envs
+*** secure and isolation
+**** compromised guest OS won't affect the other OS
+*** scaling
+*** replication for correcness
+** Disadvantages
+*** memory
+**** each guest includes a complete OS including drivers, binaries, and libraries
+**** duplicated memory for the OS
+*** slow start
+**** have to boot up a VM
+* Containerization
+** virtualization has really high overhead
+** container includes application code and deps
+*** does not include OS
+** dont't have all the guest operating systems
+*** use container runtime instead
+** using a container
+*** install container runtime (Docker)
+*** create Docker image
+**** copy hello.py into container
+**** configure container to executre server
+**** docker build
+*** run docker from host
+**** docker run insta485
+** lower memory footprint
+** fast start-up time
+** all containers that run on a Linux hsot must be designed for Linux
+* Virtualization vs Containerization
+** abstraction of hardware vs OS
+** high mem vs low mem
+** stateful vs stateless
+** multiple OS on single machine vs multiple apps

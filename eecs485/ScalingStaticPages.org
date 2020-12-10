@@ -1,0 +1,75 @@
+#+TITLE: Scaling Static Pages
+#+DATe: Wed Dec  9 19:25:46 2020 
+
+* Infrastructure as a service: rent a computer in someone else's datacenter
+**  benefits
+** * physical datacenter handled by someone else
+** * backups and failover handled by someone else
+** * instantly and automatically rent more computers
+**  examples
+** aws ec2, google compute engine, azure vms
+* IaaS to PaaS
+** problem: managing software on many rented computers is a pain
+** solution: rent computers with the software already installed
+** PaaS: rent computer in someone else's data center
+** examples: servers with database already installed
+* Software as a Service: rent a web app build, hosted, and maintained by somebody else
+** zero effort
+** ex
+*** ms office, dropbox, github, gmail
+* how do I run web app in the cloud
+** scale one thing at a time
+** static pages, server-side dynamic pages, client-side dynamic pages, etc.
+* Static pages
+** a request returns a copy of a file
+** how do we server copies to many clients at a the same time
+*** many servers
+** long time for request/res to traverse global internet
+*** servers in different geographic locations
+* IP
+** every computer has an address
+** when client makes request, goes to router -> router -> intened destination
+*** more hops = more time
+*** request/response takes longer
+* DNS
+** direct clients to the IP address of nearby server using DNS
+** translates ips to names 
+** continuously updated by many parties
+** when browswer makes request for a webpage
+*** goes to nameserver -> returns ip address
+*** use ip to connect to server
+** namespace
+*** names must be unique
+*** tree structure 1-63 chars per node
+*** each node is usually a server running DNS server software
+*** grouped into administrative zones
+*** can be primary or secondary servers
+**** secondary pulls data from primary servers
+** Ip address are commonly assigned automatically
+** DHCP: Dynamic Host Configuration Protcol
+** root nameservers
+*** responsible for locating the top level domain name servers
+*** 13 total in the world
+** Administration
+*** IANA oversees global IP allocation
+** DNS as a security vulnerability
+*** DNS cache poisoning
+**** direct requests to twitter.com to the wrong IP address
+*** remedies
+**** use HTTPS/SSL/TSL, problem mitigated
+**** DNSSEC is a security extension to DNS
+* CDN
+** Content Delivery Network
+** stores static files at many locations throughtout the world and serves nearby clients
+** STATIC FILES: HTML, images, videos
+** Akami
+*** first content-delivery
+**** step 1: places servers across the country
+**** step 2: gets client data
+***** especially images, videos
+**** step 3: copies to all ndoes in network
+***** each server gets a copy of everything
+***** specialized DNS servers resolve name to nearby servers
+***** resolution strongly dependent on location of client, network conditions
+*** CDN outages = website down
+** copies of static content
