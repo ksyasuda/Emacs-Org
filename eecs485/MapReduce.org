@@ -1,0 +1,25 @@
+#+TITLE: Map Reduce
+#+DATE: Wed Dec  9 15:06:55 2020 
+
+* Parallelize our example
+** Problems
+*** separate inputs among many machines
+*** combinig results of different machines
+*** don't know how many machines are running
+** MapReduce
+*** Master and Groupers
+*** Input and Output up to the programmer
+*** Uses Hadoop MapReduce streaming interface
+**** what we used in p4
+** Execution Model
+*** segment input
+*** map stage
+*** group stage
+*** reduce stage
+* Fault Tolerance
+** What happens when machine dies
+*** if map worker dies
+**** restart task on different worker
+**** lose the map work but no big deal
+*** if a reduce worker dies
+**** restart the reducer, using output from source mappers

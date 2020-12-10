@@ -1,0 +1,100 @@
+#+TITLE: Os And Parallelism
+#+DATE: Wed Dec  9 15:16:06 2020 
+
+* Process abscraction
+** provided by os
+** process is a program in execution
+*** programs are static entities with potential for execution
+** Process has
+*** PID, unique address space, 1 or more threads, some other resources
+** Multi process example
+*** can start a process from within another proces
+*** main process and child processes
+**** 4 separate processes with 4 different PID and stack/heap
+** When are they useful
+*** multiple things happening at once
+*** different programs running on same machine
+*** same program running on different machines
+* Threads
+** Multiple functions in one process
+** 2 threads = 2 stacks 
+** a thread = a function
+** each CPU core can run one thread at a time
+** every 1 to 10ms it can switch the thread
+** Useful?
+*** many things happening at once within one program
+*** may need to share data in memory
+*** usually some slow resource
+**** network server
+**** controlling physical system
+**** window sytem
+**** parallel programming
+** Web server example
+*** one request at a time
+**** easy to program but slow
+***** cant overlap disk request with computation or with network receives
+*** event-driven web server
+**** faster but complicted to program
+***** keep track of multiple requests, what stage outstanding disk I/O, outstanding network I/O
+*** multi-threaded web server
+**** one thread per request
+***** thread issues request then waits for it to finish
+***** though thread is blocked on I/O, other threads can run instead
+***** up to the OS when to take turns
+** Benefits
+*** simpler programming model
+*** thread manager takes care of CPU sharing
+* process vs thread
+** threads have lower overhead than processes
+*** often used when threads share data with one another
+** processes provide separate address space
+*** useful when there is not complete trust
+*** useful to limit the damage caused by buggy code
+*** needed when threads are on different computers
+**** web and distributed systems programming
+* Synchronization
+** cooperating threads
+*** don't know when threads are gonna take turns
+*** many possible orderings for the events
+*** non-deterministic ordering - non-deterministic results
+**** ordering within thread is sequential, but many ways to merge per-thread order into a global order
+** Atomic operations
+*** atomic - operation is indivisible
+**** happens in its entirety or not at all
+**** no other events can occur while it is running
+***** threads can't take turns in-between
+*** atomic operations in Python
+**** update, insert, read, etc. of dictionaries, lists
+**** read/write of built-in types
+**** read and write assignemt of instance variables
+*** safe to perform these operations simultaneously from different threads
+*** Combinations of atomic operations are not atomic
+**** safe to execute x = 1 and x = 0 in different threads
+**** not safe to execute x = x + 1 in different threads
+*** how to make x = x + 1 safe
+**** use Locks
+***** before modifying x, acquire the lock
+****** don't let anyone interrupt execution when there is a lock
+* Sockets
+** network socket provides virtual NIC for a process
+*** specify sender or reciever by both Ip and port num
+*** TCP establishes connnection between two sockets
+*** UDP sends packets from one socket to another
+** Socket api is provided by the operating system and lets application programs use network sockets
+** process sends message to its sockets
+** process recieves messages from its socket
+** at the client
+*** translate localhost into ip address
+*** decide to use TCP
+*** create socket
+*** connect to localhost at port
+*** send data
+*** close connection
+** server
+*** create socket
+*** use TCP
+*** bind to socket at port
+*** listen on socket
+*** accept connection request
+*** recv the packets until connection closed
+*** close socket

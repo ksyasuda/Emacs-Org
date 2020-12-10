@@ -1,0 +1,49 @@
+#+TITLE: Link Analysis
+#+DATE: Wed Dec  9 17:43:47 2020 
+
+* word on a page to rank search results
+* web as a graph
+** each web page is a vertex
+** link is an edge
+** If lots of pages link to a page it is important
+** if an important page links to a page, that page is important
+* figure out which sites are most important
+* PageRank
+** a node with C links contributes 1/C of its PageRank to each target node
+** dampening factor d is usually .85
+** Example
+** total PR is 1, so each node gets initialized to 1/N
+** d = .85
+** PR(A) = (1 - .85)/4 + .85 * (.25/1 + .25/1 + .25/1)
+** PR(A) = .675
+* HITS algorithm
+** hubs and authorities
+** unlike pagerank this is query-dependent
+** alg
+1. initialize all auth and hub scores to 1
+2. for all nodes, update auth score
+3. for all nodes, update hub scores
+4. normalize scores
+   a. divide each auth by sqrt(sum(auth^2))
+   b. same for each hub
+5. if converges, terminate; else goto 2
+* Differences
+** hits is dependent on the query
+*** have to build the query to build the root set and base set
+** pagerank independent of a query
+*** compuyte it and save the results
+* SEO:
+** TF x IDF is one factor in search rankings
+** what can you do to influence tfidf
+*** pages focus on a particular topic
+*** you'll probably naturally use important words multiple times
+*** length won't help
+*** create a page with many repetitions of keywords
+** keyword technical considerations
+*** search engines need text to extract keywords
+*** use text rather than images for important content
+*** site should work with JavaScript disabled
+** link spam
+*** bots add comments to blogs.  Comments link back to your site.
+*** blog owner should use rel="nofollow" attribute for links in comments.  Search engines ignore these links
+** Use different links for different pages

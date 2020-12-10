@@ -1,0 +1,51 @@
+#+TITLE: Networking
+#+DATE: Wed Dec  9 14:55:13 2020 
+
+* TCP Big Idea
+** sender stores data in buffer until ACK
+*** resend any data lost
+** Receiver reassembles messages from packets
+*** queue means order doesn't matter
+*** application given data in order
+** Detecting Lost Packets
+*** send packet, wait for ACK
+*** receiver ACKs everything
+**** if ACK came later then it would timeout and resend
+** TCP in action
+*** tcpdump and wireshark
+* Flow Control
+** how fast can we send data without overwhelming the receiver
+** flow control is about the receiver
+** sliding window
+*** receiver tells sender how much space the sender can assume its buffer has
+*** send multiple packets and receiving packts
+*** Sender
+**** tells receiver how much space it can take
+** Sockets
+*** buffer tied to host:port pair
+*** ports are implemented in OS
+*** http: 80, HTTPS: 443, SSH: 22
+* Congestion Control
+** overloaded router
+** when output speed of router not fast enough for inputs
+** router drops packets when it's full
+*** delete packets
+*** knows that later TCP will resend the packets
+** each TCP sender maintains a congestion window to manage network capacity
+*** min number of bytes to have in transit
+*** number of bytes still awaiting ACK
+** Adapting the congestion window
+*** decrease upon losing a packet: backing off
+*** increase upon success: optimistically exploring
+** When packets timeout, it knows the network might be congested
+** AIMD sawtooth
+*** when there is a timeout, there is packetloss so it reduces the window size
+*** Additive Increase Multiplicitive Decrease
+* We need both
+** different concepts but similar mechanisms
+** TCP window is both of them and take the min
+* HTTP 1.0
+** one HTTTP request/response per TCP connection
+** many connections per HTML page
+* HTTP 1.1
+** reuse the same TCP connection
