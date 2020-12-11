@@ -1,0 +1,31 @@
+#+TITLE: Fault Localization
+#+DATE: Fri Dec 11 12:40:28 2020 
+
+* Modern software is huge
+* Humans are poor at comprehending large scales
+* Fault localization is the task of identifying source code regions implicated in a bug
+** regresssion test is failing, which lines should we change to fix it
+** answer is not unique: there are often many places to fix a bug
+** debugging includes fault localization
+** answer may take the form of a list ranked by sus
+* Debuggers
+** can operate on source code or assembly code
+** inspect values of registers, memory
+** key features
+*** attach to process
+*** single-stepping
+*** breakpoints
+*** conditional breakpoints
+*** watchpoints
+* Signals
+** a signal is an asynchronous notification sent to a process about an event
+*** Ctrl+C
+*** exceptions (divide by zero, null ptr)
+*** from the OS (SIGPIPE)
+** can install a signal handler - a procedure that will be executed when the signal occurs
+*** signal handlers are vulnerable to race conditions
+* Attaching a Debugger
+** requires operating system support
+** special system call that allows one process to act as a debugger for a target
+*** what are security concerns
+** once this is done, debugger can basically "catch signals" delivered to the target
