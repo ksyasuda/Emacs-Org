@@ -1,0 +1,7 @@
+#+TITLE: Information Retreival
+
+* Precision
+** P = tp/(tp + fp)
+** precision: the fraction of docs that are relavant = relavant/retrieved
+* Recall
+** fraction of relevant docs that are retreived = retreived/relevant
