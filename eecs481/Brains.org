@@ -1,0 +1,9 @@
+#+TITLE: Brains
+#+DATE: Sun Dec 13 12:56:43 2020 
+
+* Code review and comprehension
+** developers spend more time understanding and comprehending code than any other activity
+*** understanding > correctness for reuse
+* Top-down comprehension refers to cognitive processes in which experience and expectation and semantic cues guide the understanding of source code
+* plans are knowledge structures representing semantic and syntactic software patterns
+** the identifier bubbleSort encourages programmers to expect elements of that algorithm, such as array element swaps

@@ -1,0 +1,104 @@
+#+TITLE: More Requirements
+#+DATE: Sat Dec 12 21:03:43 2020 
+
+* Requirement elicitation
+** relies on communication with stakeholders
+** validation checks the correctness of the requirements; verification checks the correctness of software
+** risk includes both the likelihood and consequence of failure
+** the process of identifying system reqs through communication with stakeholders typically
+1. identify stakeholders
+2. understand the domain
+   a. analyze artifacts, interact with stakeholders
+3. discover the real needs
+   a. interview stakeholders, resolve conflicts
+4. explore alternatives to address needs
+** stakeholder - any person or group who will be affected by the system, directly or indirectly
+*** customers, other parts of your own organization, regulatory bodies, etc.
+** stakeholders may disagree
+** reqs process should trigger negotiation to resolve conflicts
+** common criteria for identifying relevant stakeholders include:
+*** relevant positions in the org
+*** effective roles in making decisions about the system
+*** levels of domain expertise
+*** exposure to perceived problems
+*** influence in system acceptance
+*** personal objectives and conflicts of interest
+** Understand the domain:
+*** content analysis involves learning about the system domain
+**** books, articles, wiki, etc.
+*** focuses on the sytem to be built or replaced
+**** how does it work, what are the problems, are there manuals, bug reports?
+*** also involes the organization
+*** reusing knowledge from other systems
+** domain-independent checklist
+*** privacy, security, reliability, etc.
+*** even "performance" can be complicated
+** discover real needs via interviews
+*** having identified stakeholders of interest and information to be gathered
+*** conduct an interview
+**** can be structured or unstructured, individual or group
+**** may be a simple phone call
+*** record and transcribe the interview
+*** report important findings
+*** check validity of report with interviewee
+** reqs interview advice
+*** get basic facts about interviewee before
+*** review interview questions before interview
+*** begin concretely with specific questions, proposals: work through prototypes or scenario
+*** be open-minded; explore additional issues that arise naturally, but stay focused on the sytem
+*** contrast with current system or alternatives
+**** explore conflicts and priorities
+*** plan for follow-up questions
+** why is this a problem? how do you solve the problem today? how would you solve this?
+** describe the interviewee's problems and needs in your own words: often you do not share the same image.  It is very very common to not understand each other even if at first you think you do
+** Interview tradeoffs
+*** strengths
+**** reveal what stakeholders do, feel, and prefer
+**** how they interact with and challenges with the system
+*** weaknesses
+**** subjective, yield inconsistencies
+**** hard to capture domain knowledge
+**** organizational issues, such as politics
+**** hinges on interviewer skill
+** stakeholders do not always know what they want
+*** be faithful to stakeholders needs and expectations
+*** anticipate additional needs and risks
+*** validate that additional needs are necessary or desired
+** always ask do you have any more problems?
+** terminology clash: same concept named differently in different statements
+*** library: borrower vs partron
+** designation: same name for diff concepts in diff statements 
+** structure clash: same concept structured differently in different statements
+** in a strong conflict, statements are not satisfiable together
+** weak conflict, statemetns are not satisfiable together under some boundary condition
+*** "patrons shall return borrowed copies within X weeks" vs "patrons may keep borrowed copies as long as needed" contradicts only if "needed>X"
+*** there exists a situation where it doesn't work
+** for terminology, designation, and structural conflicts: build a glossary
+** for weak and strong conflicts: negotiation is typically required
+*** if the cause is different stakeholders objectives, it must be resolved outside of RE
+** Explore Alternatives
+*** alternative solutions and tradeoffs are typically presented via prototypes, mockups, or storyboard
+*** mockups can be low or high-fidelity
+** storyboards and ockups def do exist, but are often informal and incomplete
+** humans are better at recognizing and evaluating solutions than facing blank pages
+** mockups and prototypes explore uncertainty in requirements
+*** validate that we have the right reqs
+*** get feedback on a candidate solution
+*** I'll know it when I see it
+** stories illuminate the system by walking through real or hypothetical sequences
+** formal standards for writing down requrements exist but vary by domain and company
+** decompose a system, from the highest level of abstaction into lower-level subsystems and implementation choices
+** risk is an uncertain factor that may result in a loss of satisfaction of a corresponding objective
+*** consists of parts
+**** likelihood of failure
+**** negative consequences or impact of the failure
+**** in advance models: the casual agent and weakness
+*** matematically, risk = likelihood * impact
+** fault tree analysis is a top-down technique to model, reason about and analyze risk
+*** fault tree analysis decomposes a particular type of failure into constituent potentia causes and probabilities
+*** defines the scope of system responsibilites and identifies unacceptable risk conditions that should be mitigated
+** risk response strats
+*** accept the risk
+*** transfer the risk
+*** mitigate the risk
+*** avoid the risk

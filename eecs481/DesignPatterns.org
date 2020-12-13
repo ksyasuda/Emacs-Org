@@ -1,0 +1,48 @@
+#+TITLE: Design Patterns
+#+DATE: Sat Dec 12 21:45:09 2020 
+
+* patterns in non-software design
+** high level advice
+*** consider code change as a certainty
+**** redesign is expensive
+*** consider your requirements and their changes
+**** use patterns that fit your current or anticipated needs
+*** consider multiple designs
+* Structural patterns
+** ease design by identifying simple ways to realize relationships among entities
+** adapter design pattern is a structural design pattern that converts the interface of a class into another interface client expects
+* Adapter examples
+** implementing a stack interface using a LinkedList interface
+* composite design pattern
+** allows clients to treat individual objects and groups of objects uniformly
+* proxy design pattern
+** provides a surrogate or placeholder for another object to control access to it
+* creational design patterns
+** avoid complexity by controlling object creation so that objects are created in a manner suitable for the situation
+** make system independent of how its objects are created
+** plain ctor may not allow you to
+*** control how and when objects are used
+*** overcome language limitations
+**** eg no default arguments
+*** hide polymorphic traits
+** Named constructor idiom
+*** you declare the class's normal constructors to be private or protected and make a public static creation method
+* Factory pattern variant
+** creational design pattern that uses a factory methods to create objects without having the return type reveal the exact subclass
+** variants
+*** may encounter implementations in which special methods create the right type
+* abstract factory design pattern
+** encapsulates a group of factories that hav a common theme without specifying their concrete class
+* Singleton design pattern
+** restricts the instantiation of a class to exactly one logical instance
+** ensures that a class has only one logical instance at runtime and provides a global point of access to it
+* should only use singleton pattern when current or future requirements dictate that only one instance should exist
+** singleton is not a lisense to make everything global
+* observer pattern allows dependent object to notified automatically
+** basically youtube subscribing
+* template method desing pattern
+** behavioral desing pattern involves a method in a superclass that operates in terms of high-level steps that are implemented by abstract helper methods
+** provided by concrete implementations
+** define the skeleton of an algorithm in an operation
+** deferring some steps to subclass
+** lets subclasses redefine certain steps of that alg without chanign the algorithm's structure

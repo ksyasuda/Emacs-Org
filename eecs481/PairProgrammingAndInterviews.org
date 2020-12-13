@@ -1,0 +1,50 @@
+#+TITLE: Pair Programming And Interviews
+#+DATE: Sun Dec 13 13:23:10 2020 
+
+* multi-language projects are increasingly common
+** hard to read
+** the key bit is that the kernal of the code is the same
+** android apps/JNI, games/ C++ and Lua, ternserflow, security research: IDA Pro Python C++
+* hiring and expertise
+** need devs experienced with "both" languages
+* design
+** because cross-language coding is so difficult and error-prone, must design beforehand
+* readability
+** the "glue" code is typically incomprehensible without training
+** recall: look for familiar motifs
+*** all examples have parts that "do the same thing"
+** comprehension may also require knowing about both languages
+*** Python and Java field queries
+*** ocaml ineteger conversions
+* Test input generation
+** most tools do not support test input generation across multiple language layers
+** AFL is popular beacause it works on binaries (and thus any compiled language)
+** PEX works for any .NET / common language runtime program
+** do not assume tools will work for multi-language projects: plan in advance to mitigate risk
+* debugging
+** outside of some bytecode/CLR instances, debuggers almost never help with multi-language projects
+* Debugging and Dynamic Analysis
+** typicall just pick one language's debugger / dynamic analysis tool
+** argument that with print-statement debugging at interfce boundaries
+** debugging is annoying if the bug is isolated to code in just one language
+** "very, very difficult" if the bug actually involves crossing the boundary
+** would CHESS or Eraser work across language boundaries
+*** prob not
+* static analysis and refactoring
+** unless the tool happens to support all relevant languages it will only report defects in some of the code
+*** and it will make conservative assumptions about what happens at the cross-language interface
+**** more false positives and/or false negatives
+** multi-language refactoring is an open research problem
+* requirements and Quality properties
+** dominant reason to use multiple languages is to gain the ease and safety of a high-level language for most of your program and the speed of a low-level one for critical kernels
+* Abstraction allows the same code to be applied to different data
+** saves development and QA effort
+* Modularity permits a separation of concerns, allowing code both sides of the interface to be changed independently
+** reduces maintenance effort
+* smaller work increments reduce effor tlost to, and minimize risk from, changing requirements
+* smaller teams and customer involvement reduce risks from changing requirements and align software with stakeholders
+* quality techniques like CI, unit testing, pair programming, desing patterns, refactoring, etc assure quality
+* Agile development
+** software development is considered agile when the team requires relatively little time, cost, personne, and resources to respond to a requirement change
+** team autonomy: the extend to whcih the software team has authority and control in making decisions to carry out the project
+** diversity: the extend to which team members have different functional backgrounds, skills, expertise and experience

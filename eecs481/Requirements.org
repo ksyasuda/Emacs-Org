@@ -1,0 +1,82 @@
+#+TITLE: Requirements
+#+DATE: Sat Dec 12 20:35:53 2020 
+
+* One Slide Summary
+** Requirements articulate the relationship interface between a desiered systtem and its env
+*** includes both what is and what should be
+** we distinguish between functional and quality requirements
+*** both should be measurable in some way
+** requirements can describe variables, inputs, outputs, and assumptions between them
+** we distinguish between informal statements and verifiable requirements
+* requirements say what the system will do, not how it will do it
+** hardest single part of building a software system is deciding precisely what to build
+** cost of getting requirements wrong
+* goal: figure out what should be built
+* environment vs machine
+** each have their own domains and the specification is the bridge between the domains
+* System requirements: relationship between monitored and controlled variables
+* software requirements: relationship between inputs and ouputs
+* domain properties and assumptions state relationships between those
+* they describe what is observable at the environment-machine interface
+* indicative mood: describes the environment (as-is)
+* optative mood: to describe the environment with the machine (to-be)
+* functional requirements: describe what the machine should do ('get the right answer')
+** input, output
+** interface
+** response to events
+* criteria
+** completeness: all reqs are documented
+** consistency: no conflicts between reqs
+** precision: no ambiguity in reqs
+* Quality Reqs
+** specify not the functionality of the system, but the manner in which it delivers that functionality
+** can be more critical than functional requirements
+*** can work around missing functionality
+*** low-quality system may be usable
+* design criteria to help choose between alternative implementations
+** the question becomes: to what extend must a product satisfy these requirements to be successful
+* should be verifiable non-functional requs
+* quality reqs examples
+** confidentiality req: a non-staff patron may never know which books have been borrowed by others
+** privacy req: calendar constraint of a participant may bever be disclosed to other invited participants without consent
+** integrity: return of book copies shall be encoded correctly and by staff only
+** availability
+** reliability: train acceleration control software shall have a mean time between failures on the order of 100 hours
+** accuracy: copy of a book shall be stated as available by the loan software if and only if it is actually available
+** performance: response to queries shall take less than 2 seconds
+* Knowledge acquisition: how to capture relevant detail about a system
+** is the knowledge complete and consistent
+* knowledge representation
+** once captured, how do we express it most effectively
+*** for who
+*** received consistently by differeent people
+* typical steps
+** identify stakeholders
+** domain understanding
+** requirements elicitation
+** evaluation and agreement (conflicts, prioritazation, risks)
+** documentation and specification
+** consolidation and quality assurance
+*** multiple levels
+*** make sure requirements are gathered correctly
+* target qualities for RE processes
+** completeness of obj, reqs, assumptions
+** consistency of RD items
+** adequacy of reqs, assumptions, domain props
+** unambiguity of RD items
+** measurability of reqs, assumptions
+** pertinence of reqs, assumptions
+** feasibility of reqs
+* Types of RE errors and flaws
+** omission, contradiction, inadequacy, ambiguity, unmeasurability, noise/overspecification, unfeasiblity, unintelligibility, poor structuring, etc
+** omission: problem/world feature not stated by and RD item
+*** no req about state of train doors in case of emergency stop
+** contradiction: RD items stating a problem/world feature in an incompatible way
+*** "all doors must always be kept closed between platforms"
+*** "all doors must be opened in case of emergency stop"
+**** what happens if there is an emergency between platforms
+** inadequacy: RD item does not clearly state a problem/feature
+*** "panels inside trains shall display all flights served at next stop"
+** ambiguity: RD item allowing a problem/feature to be interpreted in different ways
+*** all doors shall be opened as soon as the train is stopped at the platform
+**** when do you start opening the doors?

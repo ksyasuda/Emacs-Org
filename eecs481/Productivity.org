@@ -1,0 +1,8 @@
+#+TITLE: Productivity
+#+DATE: Sun Dec 13 13:02:53 2020 
+
+* humans demonstrate different levels of expertise at programming tasks
+* traditional model of a person thinking after each system response appears to be inaccurate.
+** instead, people seem to have a sequence of actions in mind, contained in a short-term mental memory buffer
+** by definition it is short term so if there is a delay you lose the 'task queue'
+* rapid response time
