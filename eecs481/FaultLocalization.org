@@ -29,3 +29,33 @@
 ** special system call that allows one process to act as a debugger for a target
 *** what are security concerns
 ** once this is done, debugger can basically "catch signals" delivered to the target
+* Building a debugger
+** attach to target
+** set up signal handler
+** add in exception-causing instructions
+** inspect globals, etc.
+* Advanced breakpoints
+** optimization: hardware breakpoints
+*** special register: if PC = HBP register value, signal an exception
+*** faster than software, works on ROMs, only limited number of breakpoints
+** feature: conditional breakpoint
+*** break at instruction x if some_variable = some_value
+** signal handler checks the condition
+*** if so, present interactive debugging prompt
+*** if not, return to program immediately
+*** fast or slow?
+**** probably slow
+* Single-Stepping
+** debuggers also allow you to advance through code one instruction at a time
+** equivalent to
+*** put breakpoint at next instruction
+*** resume execution
+*** repeat
+* Watchpoints
+** you want to know when a variable changes
+** watchpoint is like a breakpoint but it stops execution after any instruction changes the value at location L
+*** Software watchpoints
+**** put breakpoint at every instruction
+**** check if value of L against stored value
+*** hardware watchpoints
+**** special register holds L: if value at address L every changes, the CPU raises an exception
