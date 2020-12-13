@@ -1,0 +1,37 @@
+#+TITLE: Delta Debugging
+#+DATE: Sat Dec 12 17:15:46 2020 
+
+* Delta debugging is an automated debugging approach for finding a one-minimal interesting subset of a given set
+** very efficient
+** divide and conquer
+** relies heavily on critical assumptions
+*** monotonicity, unambiguity, and consistency
+** can be used to find which code canges cause a bug, to minimize failure-inducing inputs, and even to find harmful thread schedulers
+* three problems: one common approach
+* failure-inducing input
+** having a tets input may not be enough
+*** even if you know the sus code, the input may be too large
+* Thread scheduling
+** multithreaded programs can be non-deterministic
+*** can we find simple, bug-inducing thread schedules
+* Code Changes
+** new version of GDB has a UI bug
+*** the old version does not have the bug
+** 178,000 lines of code have been modified between the two versions
+*** where is the bug
+*** these days: continuous integration testing helps but doesn't totally solve this problem
+* what is the difference
+** difference - a change in program config or state that may lead to alternate observations
+** difference in input: different character or bit in the input stream
+* Unified Solution
+** find which part of something (= which difference, which input, which change) determines the failure
+** divide and conquer
+*** aplied to: working and failing inputs, code versions, thread schedules
+* delta debugging alg
+** given as a set C = set of changes
+** interesting function -> yes, no
+** Interesting(C) = Yes
+** interesting is monotonic, unambiguous and consistent
+** alg returns a one-minimal interesting subset M of C
+* One-Minimal Defined
+**  
