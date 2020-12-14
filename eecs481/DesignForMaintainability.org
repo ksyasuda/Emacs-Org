@@ -1,0 +1,64 @@
+#+TITLE: Design For Maintainability
+
+* components and documentation
+** appeal from a dev on a mailing list
+*** more descriptive commit messages
+*** ideally should state what you've changed and also why
+** focus on adding why information to your documentation, comments and commit messages
+** because there is a tool and process support for adding or recovering that
+* documenting exceptions
+** @throws information such as @exception IllegalArgument if id is null or id.equal("") can be automatically inferred via tools
+*** same approach as test input generation
+*** gather constraints to reach the "throw" line
+*** then rewrite them in English
+*** instead of solving them
+*** explain what the code does
+* why for exceptions
+** tools are at least as accurate as humans 85% of the time, and are better 25% of the time
+*** tools can do What - so have humans focus on Why
+* Design for Change and Reuse
+** in class, many programs are written once, to a fixed specification, and thrown away
+** classes are open for extension and modification without invasive changes
+** subtype polymorphism enables changes behind interfaces
+** classes encapsulate details likely to change behind stable interfaces
+** internal parts can be developed independentely
+** internal details of other classes donot need tobe understood, contract is sufficient
+** class implementations and their contracts can be tested separately (Unit Testing)
+* delegation is when one object relies on another object for some sbest of its functionality
+** sort delegates functionality to some Comparator
+* judicious delegation enables code reuse
+** sort can be used with arbitrary sort orders
+** comparators can be resued with arbitrary client code that needs to compare integers
+** reduce "cut and paste" code and defects
+* strategy design pattern
+** create an interface for the algorithm, with an implementing class
+* template method design pattern
+** algorithm has a customizable and invariant part
+** implement the invariant part of the algorithm in an abstract super calss, with abstract primitive operations representing teh customizable parts of the algorithm
+** subclasses customize the primitive operations
+* consequences
+** code reuse for the ivnariant part of the algorithm
+** customization is restricted to the primitive operations
+* template method vs. strategy
+** both support variation in a larger context
+* Template method uses inheritance + an overridable method
+* Design by contract perscribes that software designers should define formal, precise and verifiable interface specifications for components, which extend the ordinary definition of abstract data types with preconditions, postconditions and invariants
+* subclass can only have weaker preconditions
+** super only works on positive numbers, but I work on all numbers
+* subclass can have stronger postconditions
+** suepr returns any shape, but i return squares
+* design for testability
+** majority of SE is maintenance, and the majority of cost of it is QA, the majority cost of QA is testing
+*** consider library oreiented architecture, a variation of modular programming or service-oriented architecture with a focus on separation of concerns and interface design
+*** desinged a mutation engine for HW
+* Code coverage has many flaws
+** simple coverage metrics do not align with covering requirements
+* solution: better test suite adequacy metrics (mutation etc.)
+** can write code so that high code coverage correlates with high requirement coverage
+* requirement coverage
+** explicit conditional pros
+*** testing tools can help you reason about partial progress
+*** testing tools can try to falsify claims
+** cons
+*** muddies meaning of coverage (100% not as desired)
+**** have to look at more than just the test cases but also the code

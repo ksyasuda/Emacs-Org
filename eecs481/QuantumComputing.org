@@ -1,0 +1,7 @@
+#+TITLE: Quantum Computing
+#+DATE: Sun Dec 13 16:32:11 2020 
+
+* why is quantum different
+** superposition
+* one-slide summary
+** quantum computer manipulates quantum bits; such qubits can represent superpositon

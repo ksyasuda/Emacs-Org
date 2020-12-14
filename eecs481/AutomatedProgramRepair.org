@@ -1,0 +1,62 @@
+#+TITLE: Automated Program Repair
+#+DATE: Sun Dec 13 16:05:16 2020 
+
+* Fault localization can norrow a problem down to 10-100 lines of code
+* many defects can be fixed with small changes
+** mutation can generate candidate patches from simple edits
+** a search-based software engineering problem
+* can use regression testing (inputs and oracles, continuous integration testing) to assess patch quality
+* Minimizing patches
+** longer patches are harder to read
+** extraneous edits may only appear safe because of weak test suites; avoid unneded churn
+** after the repair search, use delta debugging to find a passing 1-minimal edit subset
+* Minimizing costs
+** can stop generating candidate mustants when a valid repair is found, parallelize in the cloud
+** each repair must pass the entire test suite
+*** running tests is the dominant cost of automated program repair
+*** use test suite prioritization and minimization
+*** stop evaluating as soon as a single test fails
+**** even one failure -> not a valid repair
+* relationship with mutation testing
+** program repair approach is a duel of mutation testing
+*** ideally mutation testing takes a program that passes its test suite and requires that all mutants based on human mistakes from the entire program that are not equivalent fail at least one test
+*** by contrast, program repair takes a program that fails its test suite and requires that one mutant based on human repairs from teh fault localization only be found that passes all tests
+* no source code needed
+** can repair assembly or binary programs to support multi-language projects
+** use sampling-based profiling for fault localization
+* can humans use these patches
+** Test input generation constraints -> english
+* Human-machine partnerships
+** what if your partner in pair programming
+** machine is the driver you are navigator/observer
+*** in response to feedback, it suggests new patches
+* Concurrency bugs
+** we can use dynamic analysis like CHESS or Eraser to detect concurrency bugs
+*** look for two threads accessing X, one is a write
+** use special repair templates
+* Quality defects
+** what if the bug is that your program is too slow or too big or uses too much energy
+** can also improve and trade-off verifiable quality properties
+** candidates must pass all functional tests
+** can present a pareto fontier to help users explore alternate solutions
+*** each solution is not strictly better than the other so have to ask the users
+* Code inspection
+** what if we want to imporove code inspection
+*** make evosuite-generated unit tests
+** use a learned readability metric to rank them
+*** give two tests with equal coverage, humans agree with readability ranking 69% of the time
+*** recall difficulties with normative models
+* Humans are 14% faster when answering maintenance questions on readability-optimized tests (same level of accuracy)
+* requiremenets and testing
+** automated tests repair push burden back to testing, documentation, and others
+* the future
+** some form of automated repair is in the future
+* productive imposters
+** future of software engineering is reading and talking
+* estimate the costs and benefits
+** chaeper now
+** do not have to use the tool exclusively
+** fault tree analysis is possible
+* facebook SapFix
+** findinx and fixing software bugs automaticaly with SapFix and Sapienz
+*** uses mutation type testing
