@@ -1,0 +1,6 @@
+#+TITLE: Hiring Is Broken
+#+DATE: Tue Dec 15 01:12:48 2020 
+
+* Used Hacker News, a social website for software practitioners, to conduct the investigation
+* high stress environment in interviews and it does have a negative effect on memory and reall
+* the interview process does not care about false negatives, they only care about filtering out false positives

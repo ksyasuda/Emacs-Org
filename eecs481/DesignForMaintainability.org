@@ -1,5 +1,40 @@
 #+TITLE: Design For Maintainability
+#+DATE: Tue Dec 15 01:58:53 2020 
 
+* should focus our efforts on reading the code before writing it
+* story so far
+** want to deliver and support a quality software product
+*** we understand the stakeholder requirements
+*** we understand process and design
+*** we understand quality assurance
+** how should we make process and design decisions the first time
+** if software maintenance will be the dominant activity
+* one slide summary
+** we can invest up-front in desiging software to facilitate maintenance activities
+** consider designing to improve comprehension, documentation, change, reuse, and testability
+*** metrics used for understandability, category of information conveyed by documentation, oop
+* Investment
+** to invest is to allocate money (or something) in expectation of some benefit in the future
+** almost always want to invest time during design to produce maintainable software
+* design for maintainability
+* Pride
+** first thing to change is you
+*** you likely think of yourself as a coder
+*** shoudl think of yourself as a maintainer
+** change your internal notion of a good job for writing relatable, elegant code
+* design for code comprehension
+** essential complexity, which follows from the problem statement
+*** sorting requires N logN time
+** and accidental readability, which can be more directly controled by software engineers
+* Readabilty
+** a human judgment of how easy a text is to understand
+** even if a non-native speaker tried to read it they could understand it
+** code readability seems subjective
+** coudl ask humans and model their average notion of readability
+* DESCRIPTIVE VS PRESCRIPTIVE
+** descriptive modeling is a mathematical process that describes real-world events and the relationship between factors correlated with them
+** prescriptive or normative model evaluates alternative solutions to answer the question "What is going on?"
+*** suggests what ought to be done or how things should work in the future according to an asumption or standard
 * components and documentation
 ** appeal from a dev on a mailing list
 *** more descriptive commit messages
@@ -13,9 +48,13 @@
 *** then rewrite them in English
 *** instead of solving them
 *** explain what the code does
+* High-Quality comments
+** you should focus on adding why information to your documentation, comments and commit messages
 * why for exceptions
 ** tools are at least as accurate as humans 85% of the time, and are better 25% of the time
 *** tools can do What - so have humans focus on Why
+** tools can do what so humans should focus on the why
+** some of these may be exception-sepcific but the point is that machines can do this well
 * Design for Change and Reuse
 ** in class, many programs are written once, to a fixed specification, and thrown away
 ** classes are open for extension and modification without invasive changes
@@ -24,23 +63,86 @@
 ** internal parts can be developed independentely
 ** internal details of other classes donot need tobe understood, contract is sufficient
 ** class implementations and their contracts can be tested separately (Unit Testing)
-* delegation is when one object relies on another object for some sbest of its functionality
-** sort delegates functionality to some Comparator
-* judicious delegation enables code reuse
-** sort can be used with arbitrary sort orders
-** comparators can be resued with arbitrary client code that needs to compare integers
-** reduce "cut and paste" code and defects
-* strategy design pattern
-** create an interface for the algorithm, with an implementing class
-* template method design pattern
-** algorithm has a customizable and invariant part
-** implement the invariant part of the algorithm in an abstract super calss, with abstract primitive operations representing teh customizable parts of the algorithm
-** subclasses customize the primitive operations
-* consequences
-** code reuse for the ivnariant part of the algorithm
-** customization is restricted to the primitive operations
-* template method vs. strategy
-** both support variation in a larger context
+* Design Desiderta
+** classes are open for extension and modification without invasive changes
+** subtype polymorphism enables changes behind interfaces
+** classes encapsulate details likely to change behind stable interfaces
+** internal parts can be developed independently
+*** don't have to get info from other people when possible
+** internal details of other classes do not need to be understood, contract is sufficient
+** class implementations and their contracts can be tested separately (unit testing)
+*** can change one class and someone else can change another over time
+* design for reuse
+** delegation is when one object relies on another object for some sbest of its functionality
+*** sort delegates functionality to some Comparator
+*** judicious delegation enables code reuse
+**** sort can be reused with arbitrary sort orders
+**** comparators can be reusued with arbitrary client code that needs to compare integers
+**** reduce "cut and paste" code and defects
+* Design Patterns
+** strategy design pattern
+*** create an interface for the algorithm, with an implementing class
+*** consequences
+**** easily extensible for new algorithms implementations
+**** separates algorithm from client context
+**** introduces extra interface and classes; code can be harder to understand; adds overhead if the strategies are simple
+** template method design pattern
+*** algorithm has a customizable and invariant part
+**** parts that never change <- invariant part
+*** implement the invariant part of the algorithm in an abstract super calss, with abstract primitive operations representing teh customizable parts of the algorithm
+**** unimplemented primitive operations
+**** leave invariant parts alone
+*** subclasses customize the primitive operations
+*** consequences
+**** code reuse for the invariant parts of the algorithm
+**** customization is restricted to the primitive operations
+*** inverted "Hollywood-style" control for customization: "don't call us, we'll call you" (cf. comparison function for sorting)
+*** invariant part of the algorithm are not changed by subclasses
+**** only the customizable parts are
+** template method vs. strategy
+*** both support variation in a larger context
+*** Template method uses inheritance + an overridable method
+*** Strategy uses an interface and polymorphism (via composition)
+**** strategy objects are reusable acros multiple classes
+**** multiple strategy objects are possible per class
+*** hard to do both at the same time
+**** which would you use and why
+** Design by contract
+*** prescribes that software designers should define formal, precise, and verifiable interface specifications for components, which extend the ordinary definition of abstract data types with preconditions, postconditions and invariants
+*** subclass can only have weaker preconditions
+**** my super only workds on positive numbers, I work on all numbers
+*** subclass can only have stronger postconditions
+**** my super returns any shape, but I return squares
+*** this is the Liskov Substitution Principle
+**** the subclass can be used wherever a super class is expected
+** Design for testability
+** Library oriented architecture
+*** a variation of modular programming or service-oriented architecture with a focus of concerns and interace design
+**** package local components of your application independently
+**** maintain them as different open-source projects
+*** wrote a mutation engine for hw3
+**** design it as a mutation library
+**** method that can turn ast into python program and program to ast
+***** problem is the main fucnction that is the glue for everything
+***** make all the logical components their own parts
+****** easy to unit-test
+** Model View Controller
+*** designing angry birds
+**** it's a game, and also a simulation, so MVC is a reasonable choice
+**** design so that it can be tested without someone actually playing the game
+***** have an interface where abstract commands can be queued up: one way get them is from the UI, but another is programmatic
+***** if i create a world with blocks x, y, and z and then we launch bird A and angle B, does C occur within five timesteps?
+***** humans only have to provide the oracle but only once
+****** then random input generation can be used and run against the oracle
+** Fault Injection
+*** driver verify sat between driver and OS and pretended to expose poor driver code
+*** CHESS project exposes poor concurrency code
+* Unit Testing
+** hard to generate test inputs with high coverage for areas "deep inside" code
+*** must solve the constraints for main(), then for foo(), then for bar(), etc... all at the same time
+** the farther code is from an entry point, the harder it is to test
+*** this is one motivation behind Unit Testing
+** solution: design with more entry points for self-contained functionality
 * Template method uses inheritance + an overridable method
 * Design by contract perscribes that software designers should define formal, precise and verifiable interface specifications for components, which extend the ordinary definition of abstract data types with preconditions, postconditions and invariants
 * subclass can only have weaker preconditions
