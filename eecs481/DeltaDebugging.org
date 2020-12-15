@@ -1,6 +1,12 @@
 #+TITLE: Delta Debugging
 #+DATE: Sat Dec 12 17:15:46 2020 
 
+* story so far
+** quality assurance is critical to software engineering
+** static and dynamic QA approaches are common
+** defect reports are tracked and assigned to developers for resolution
+** modern software is so huge that simple debugging approaches do not work
+** how should we intelligently scalably approach debugging?
 * Delta debugging is an automated debugging approach for finding a one-minimal interesting subset of a given set
 ** very efficient
 ** divide and conquer
@@ -11,20 +17,30 @@
 * failure-inducing input
 ** having a tets input may not be enough
 *** even if you know the sus code, the input may be too large
+*** if the test is really huge
+*** too large to step through
 * Thread scheduling
 ** multithreaded programs can be non-deterministic
 *** can we find simple, bug-inducing thread schedules
+*** CHESS does some of this but we want to find the smallest sample we can
 * Code Changes
 ** new version of GDB has a UI bug
 *** the old version does not have the bug
 ** 178,000 lines of code have been modified between the two versions
 *** where is the bug
 *** these days: continuous integration testing helps but doesn't totally solve this problem
+**** many changes could occur before people notice the bug
+***** missing tests
+***** can't run all the tests all the time
+***** for CI, maybe you run only some of the tests because it takes so long to run all the tests
 * what is the difference
 ** difference - a change in program config or state that may lead to alternate observations
 ** difference in input: different character or bit in the input stream
+** differences in code: different statements or expressions in two versions of a program
+** differences in program state: different values of internal variables
 * Unified Solution
 ** find which part of something (= which difference, which input, which change) determines the failure
+*** smallest subset of a given set that is still interesting
 ** divide and conquer
 *** aplied to: working and failing inputs, code versions, thread schedules
 * delta debugging alg
@@ -33,5 +49,84 @@
 ** Interesting(C) = Yes
 ** interesting is monotonic, unambiguous and consistent
 ** alg returns a one-minimal interesting subset M of C
+*** if we remove one element from M it stops being interesting
 * One-Minimal Defined
-**  
+** if you remove a single element from M then M is no longer interesting 
+** suppose Interesting(M) = ints to M sum to 0
+*** M = { 7, -3, -4, 2, -2 } is one-minimal
+**** removing any element makes the set not interesting
+**** there are actually smaller subets like 2 and -2 but we would have to remove 3 elements so it is not one-minimal
+**** this set is one-minimal but not true minimal
+** interesting can be whatever you want it to be
+*** why delta debugging is so applicable
+*** you write the isInteresting script that works for basically any situation
+* example use of dd
+** C = set of n changes
+** Interesting(X) = apply changes in X to yesterday's version and compile
+** run the results on the test
+*** if it fails, return "YES" (X is an interesting failure-inducing change set), otherwise return "NO" (X is too small and does not induce the failure)
+* Naive approach
+** we could try all subsets
+** if number of elements in C is N then it is 2^n
+** we want a polynomial-time solution
+*** ideally one that is more like log(N)
+* Useful assumptions
+** any subset of changes may be interesting
+*** not just singleton subsets of size 1
+** interesting is Monotonic
+*** keeps going up or keeps going down
+*** if something is interesting and we add more, it is still interesting``
+** Unambiguous
+*** if x is enough to make program crash and y is enough to make it crash then X intersect Y is interesting
+** Consistent
+*** when you run the program, either it passes the test or it does not
+**** Yes or No
+* Insights
+** starts with basic binary search
+*** divides into P1 and P2
+*** if Int(P1) recurse on P1
+*** if Int(P2) recurse on P2
+** at most one case can apply by (Unambiguous)
+** by Consistency, the only other possibility is
+*** Interesting(P1)==No and Interesting(P2)==No
+* Interference
+** if both sides are not interesting then no subset of P1 or P2 alone is interesting
+*** so the interesting subset must use a combination of elements from P1 and P2
+*** called interference in Delta Debugging
+* Interference insight
+** consider P1
+*** find minimal subset D2 of P2
+*** such that Interesting(P1 U D2) = Yes
+**** find the smallest set from the other partition such that the union of the smaller set and the big set is interesting
+** consider P2
+*** find minimal subset D1 of P1
+*** such that Interesting(P2 U D1) = Yes
+** then my Unambiguous
+*** Int((P1 U D2) intersect (P2 U D1))
+**** reduces to (D1 U D2) because P1 and P2 are disjoint
+*** the intersection is also minimal
+*** whenever you have two sets that are both interesting, you can take the intersection of them
+* Algorithmic complexity
+** if a single change induces the failure
+*** DD is logarithmic: 2 * log |C|
+** otherwise, DD is linear
+*** assuming constant time per Interesting() check
+** if Interesting can return Unknown
+*** DD is quadratic |C|^2 + 3 |C|
+*** if all tests are Unknown except last one (unlikely)
+* Questioning Assumptions
+** all three key assumptions are questionable
+** Ambiguity
+*** what if the world is ambiguous
+*** Then DD (as presented here) may not find an Interesting subset
+** Not Monotonic
+*** if x is interesting then any superset of x is interesting
+*** what if 1 and 2 make crash but 1 2 3 and 4 is good
+** Not Inconsistent
+*** we are minimizing changes to a program to find patches that make it crash
+**** some subset may not build or run
+**** integration failure: a change may depend on earlier changes
+**** construction failure: some subsets may yield programs with parse errors or type checking errors
+**** execution failure: program executes strangely or doesnot terminate, test outcome is unresolved
+* Delta Debugging Thread Schedules
+** can tell the operating system when to change when it swithces threads

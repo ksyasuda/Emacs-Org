@@ -1,0 +1,77 @@
+#+TITLE: Chad
+#+DATE: Sun Dec 13 21:28:25 2020 
+
+* Building software that is built to last, easy to share
+** software engineering for hackers
+** good researcher good hacker good scientist
+* MIT Lincoln Labratory
+** many resources
+** github enterprise
+** tiling window managers i3
+** equipment makes a huge difference
+*** equation of productivity
+*** tradeoff between time and money
+**** spend money on killer machine and save the money
+** don't need to have only one machine
+*** two machines
+*** use the right tool for the job
+** top secret engineering
+*** no internet
+*** every tool needs to be offline
+*** download entire reference of API
+*** no stackoverflow
+* Grad school round 2
+** got work in cool complicated problems
+** repeatability really important
+*** esp in academia
+** experiments and continuous integration are not very different
+** open-sourcing code makes you a better programmer (others will see it)
+*** makes you better at coding
+** submodules are a must
+*** break up into submodules and track separately in git
+** software engineering is an absolute must
+* tooling: UCSB
+** i3 + terminator
+** pycharm (intellij)
+*** use IDEs on intensive large projects
+*** kinda irresponsible not to use it
+*** has so many tools right out of the box
+*** internal gitlab
+**** better than github apparently
+*** direnv + virtualenv a must have
+* CTF player
+** learn a lot about computer science
+** like drinking computer science from a fire hose
+** stressing more about how computers work
+* Tooling: shellphish
+** collaboration is a disaster
+** git with some special sauce
+** slack or discord
+** physical separation of teams
+* intern at IBM research
+** big things move slowly and have a lot of moving parts
+*** lots of resources
+*** lots of amazing cowerkers and internal knowledge
+*** 3 months to acquire hardware required for research
+* Tooling IBM research
+** practice doing things like VIM to pro up
+** vs code is great but not for pyton
+** parellelizing pyton is way too hard still
+* allthenticate
+** serious tradeoffs between moving quickly and doing it right
+** sound software engineering feels more expensive than ever
+** managing a company is harder than managing a team
+** human synchronization is really hard
+* lessons learned
+** learn git
+** do CI early and often
+** practice, take time to not program, but make yourself more efficient
+** ergonomics is important
+*** spend the money, don't compromise
+** invest in good equipment
+*** shoudl never be held back by your equipment it's too cheap to suffer
+* be nice to your colleagues and future you
+** make code readable
+** just because you can do something in a language doesn't mean you should
+** anything worth doing is worth doing well
+*** don't just build a thing for no reason
