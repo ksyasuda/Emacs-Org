@@ -1,0 +1,17 @@
+#+TITLE: Never Type
+
+#+begin_src js
+
+function generateError(message: string, code: number) {
+    throw {message: message, errorCode, code};
+}
+
+// does not return void... returns never
+// throw will cancel the script essentially so the function never returns a value
+// hence the return type is never
+// can use on functions
+
+generateError('An error occured', 500);
+#+end_src
+
+#+RESULTS:

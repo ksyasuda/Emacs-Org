@@ -1,0 +1,7 @@
+#+TITLE: Type Aliases
+
+#+begin_src js
+type Combinable = number | string;
+function combine(input1: Combinable, input2: Combinable)
+
+#+end_src

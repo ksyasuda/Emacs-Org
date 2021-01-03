@@ -1,0 +1,19 @@
+#+TITLE: Function As Types
+
+#+begin_src js
+
+let combineValues;
+combineValues = add;
+console.log(combineValues(8, 8))
+// will raise an error
+// need to set type of combinValues to Function
+let combineValues: Function
+// typescript can't inform us of the problem because we only said that it stores a function
+// function types
+
+// combine values accepts any function that has no params and returns a number
+let combineValues: () => number;
+
+// accept any func that accepts 2 number parameters and overall returns a number
+let combineValues: (a: number, b: number) => number;
+#+end_src

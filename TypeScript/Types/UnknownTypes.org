@@ -1,0 +1,18 @@
+#+TITLE: Unknown Types
+
+#+begin_src js
+
+let userInput: unknown;
+// unknown because we don't know lol
+let userName: string;
+
+// allowed
+userInput = 5;
+userInput = 'Max';
+
+// error
+// userName needs a string but userInput can be any value
+// using any would work here because any always works
+userName = userInput;
+// unknown makes sure you can't do everything but still have some of the benefits of TypeScript
+#+end_src

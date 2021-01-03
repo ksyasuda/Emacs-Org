@@ -1,0 +1,11 @@
+#+TITLE: Tuples
+
+* Core Types
+** number, string, boolean, object, array, tuple
+* tuple
+** [1, 2]
+*** fixed-length and fixed-type array
+** role: [2, 'author']
+** role: [number, string]
+*** person.role = [0, 'admin', 'user'] -> does not work
+*** person.role.push('admin') -> works (exception)

@@ -1,0 +1,21 @@
+#+TITLE: Enums
+
+Common to make globals
+#+begin_src js
+
+const ADMIN = 0
+const READ_ONLY = 1
+const AUTHOR = 2
+
+const Role { ADMIN, READ_ONLY, AUTHOR }
+
+const person = {
+    ...,
+    role: Role.ADMIN
+}
+
+if (person.role === Role.ADMIN) {
+    // do something
+}
+
+#+end_src

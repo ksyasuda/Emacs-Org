@@ -1,0 +1,59 @@
+#+TITLE: Tsc
+
+* Compiling The Entire Project
+** Tell TypeScript that everything in dir is a project
+** run tsc --init
+*** initialize as a TypeScript project
+**** works from current directory
+** creates tsconfig.json
+*** can now run tsc without pointing at a certain file
+*** will compile all js files in the directory
+*** tsc -w or tsc --watch will enter watch mode for all TypeScript files
+* Include/Exclude files
+** exclude option (array)
+#+begin_src json
+"exclude": [
+    "analytics.ts",
+    "*.dev.ts",
+    "node_modules",
+],
+"include": [
+    "app.ts",
+],
+"files": [
+    "app.ts",
+],
+#+end_src
+*** excludes files named in array from compilation
+*** if you set include key, you have to set every file you want to compile manually
+**** alternatively, can specify the entire folder that contains the files
+*** exclude overrides include
+**** we compile include - exclude
+*** files only individual files
+* Set Target
+** target: es5, es6, esnext, etc
+*** es6 = es2013
+* Core Libraries
+** lib option specifies default objects and features that TypeScript knows about
+#+begin_src js
+const button = document.querySelector('button')!;
+button.addEventListener('click', () => {
+    console.log('Clicked!')
+})
+#+end_src
+*** How does TypeScript know what document is and that document has a querySelector method
+*** if lib not set, sets to es6 features and all DOM API's are available
+**** if commented in, don't get the default settings anymore and ned to set the libraries manually
+#+begin_src json
+
+"lib": [
+    "dom",
+    "es6",
+    "dom.iterable",
+    "scripthost"
+]
+
+this is the default setup
+
+#+end_src
+**** without setting libs, TypeScript wouldn't know about dom or console

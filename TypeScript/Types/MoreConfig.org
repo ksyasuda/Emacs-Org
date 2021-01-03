@@ -1,0 +1,9 @@
+#+TITLE: More Config
+
+* allowjs
+** compiles files with .js endings
+* checkjs
+** does type checking and some of the TypeScript features without compiling
+* SourceMap
+** when set to true, the .js.map files would get generated
+*** act as a bridge between browsers and dev tools to connect the javascript files to the sources tab

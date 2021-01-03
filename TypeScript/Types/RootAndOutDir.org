@@ -1,0 +1,23 @@
+#+TITLE: Root And Out Dir
+
+* src and dist folder
+** dist has job of holding all the js files
+** src holds all the ts files
+*** need to move the tsc files to the output directory
+* outDir
+** tell tsc where the created files will be stored
+** "outDir": "./dist",
+*** folder structure replicated across input/output
+* rootDir
+** set at the source where the files are located in
+** "rootDir": "./scr"
+*** makes sure that the project structure is kept in the dist folder
+*** without rootDir, it tries to compile all TypeScript files in the entire directory (that is not excluded)
+* removeComments
+** take out comments from compiled code
+* noEmit
+** do not emit output files but checks the code still to make sure there are no errors
+* downlevelIteration
+** when compile to older generations of js, compilation wouldn't work correctly
+*** this option will help in this case but will also output more verbose code
+*** only turn on if have loops and generated code is wrong or has a problem
