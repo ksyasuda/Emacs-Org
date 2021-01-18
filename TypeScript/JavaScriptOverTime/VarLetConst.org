@@ -1,0 +1,50 @@
+#+TITLE: Var Let Const
+
+* var keyword
+** creates variable like let
+** has always been available in JavaScript
+** create variables in function and global scope
+** let uses block scoping
+* Block Scope
+#+begin_src javascript 
+// block scoped
+
+let name = 'John';
+// let name = 'Dea' // now allowed
+
+function greet() {
+    let age = 30;
+    
+    // 'shadows' the global variable
+    let name = 'Dea'; // allowed
+    console.log(name, age);
+}
+
+//won't work since age is only available in greet function
+console.log(name, age);
+
+greet();
+
+#+end_src
+
+#+begin_src javascript
+
+var name = 'Joe';
+// var name = 'Ann'; // allowed
+
+if (name === 'Joe') {
+    // since it is not in a function it is a global variable
+    // var only knows function scope and global scope
+    var hobbies = ['sports', 'cooking'];
+    console.log(hobbies);
+}
+
+function greet() {
+    var age = 30;
+    var name = 'Max';
+    console.log(name, age);
+}
+
+console.log(name, hobbies); //allowed
+
+#+end_src

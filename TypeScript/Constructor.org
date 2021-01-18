@@ -1,0 +1,30 @@
+#+TITLE: Constructor
+
+* Not even for constructors but
+** class methods can be given a `this` argument, along with the type, that will bind the function to an instance of the type
+#+begin_src javascript
+
+class Department {
+    name: string;
+
+    constructor(n: string) {
+        this.name = n;
+    }
+
+    describe(this: Department) {
+        console.log('Department: ' + this.name)
+    }
+}
+
+// no error because the describe method is called on the accounting object, which is of type Department
+const accounting = new Department('Accounting');
+accounting.describe();
+
+// will throw error in TypeScript since accountingCopy is an Object type, not Department
+const accountingCopy = { describe: accounting.describe };
+accountingCopy.describe();
+
+// no error because the Object hass all the properties that are expected from the Department type
+const accountingCopy2 = { name: 'Nice', describe: accounting.describe };
+accountingCopy2.describe();
+#+end_src
