@@ -1,0 +1,18 @@
+#+TITLE: Lec1
+#+DATE: Tue Jan 19 11:52:00 2021 
+
+* PEAS
+** Performance Measure
+** Environment
+** Actuators
+** Sensors
+** EX: Playing Chess
+*** Env
+**** players, board, rules
+*** Sensors
+**** movement of opponent
+*** Actions
+**** your own move
+*** perfomance measure
+**** move that leads to wins
+**** moves that lead to an advantage

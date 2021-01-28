@@ -1,0 +1,123 @@
+#+TITLE: Lec3 Search
+
+* Search problems
+* problem formulation
+** initial state
+** successor function
+** goal test
+** path cost
+* solution
+** sequence of actions that, when perfomred from initial state, leads to goal state
+* measuring perfomance
+** completeness (always finds solution if it exists), optimality, time/space complexity
+* generalized tree search
+** start by adding the inital state to frontier
+** loop
+*** if frontier is empty then fail
+*** otherwise choose a leaf node and remove it from the frontier
+*** if it is the goal state, then return the solution
+*** otherwise, expand the chosen node and add the resulting nodes to the frontier
+* repeaded states
+** need to detect repeated states
+** maintain a list of expanded nodes for checking repeated state
+** explored set: remembers every expanded node
+** newly generated nodes that match previously generated nodes in the explored set or fhte frontier can sometimes be discarded instead of being added to the frontier depending on the search strategies
+* time/space comlexity in terms of
+** b: max branching factor, how many children a node can have
+** d: depth of least cost solution
+** m: max depth of the state space (may be infinite)
+* uninformed techniques
+** use only information available in the problem definition
+** bfs, uniform-cost search, dfs, depth-limited search, iterated deepening search
+** DFS
+*** expand deepest unexpanded node
+*** implementation: LIFO queue, put successors at front
+** Depth Limited Search
+*** depth-first search with depth limit l, (nodes at depth l have no successors)
+**** solves the problem of an infinite path
+**** introduces additional source of incompleteness eg l < d
+**** df is a special case of depth-limited
+** Iterative deepening dfs
+*** l = 0
+*** search all at l
+*** increment to l = 1
+*** to a dfs at l = 1
+*** set l = 2
+*** do a dfs at l = 2
+*** l = 3
+*** ...
+*** incrementally increment the l and do a dfs
+*** PROPERTIES
+**** complete?
+***** it is complete because it will always find the solution given infinite time
+****** systematically increasing l makes it complete
+**** is optimal as well becuse of the way we increment l
+**** time complexity
+***** db + (d-1)b^2 + ... + b^d
+**** space complexity
+***** don't need to remember each previous l
+***** only need the nodes at l
+***** bd
+** bidirectional search
+*** run two simultaneous searches
+*** start and goal
+**** one goes from forward from the initial state
+**** one goes backwards from the goal
+**** hope that they both meet in the middle somewhere
+* informed searches
+** most ai problems have search space that are too large to search exhaustively
+** informed search (heuristic) search methods use knowledge to navigate the search space
+** heuristic methods
+*** greedy best-first search
+*** A* search
+** Best-First Search
+*** use an evaluation function
+**** for each node, estimates the disirability of the node
+*** impl
+**** sorted in decreasing order of desirability
+** Greedy Search
+*** nodes are expanded on basis of a guess about cost of getting from state to goal
+**** call method for making such a guess a h-cost (heurisitc cost)
+**** in map domain, could be a straight line distance from a city to Bucharest
+*** expands the node that is currently closest to the goal
+** A* search
+*** evaluation function: f(n) = g(n) + h(n)
+**** g(n): cost so far to reach n
+**** h(n): estimated cost to goal from n
+**** f(n): estimated total cost of the path through n to the goal
+*** uses an admissible heuristic
+**** ie h(n) <= h*(n), where h*(n) is the true cost from n
+**** eg hSLD(n) neber overestimates the actual road distance Theorem: A* search is optimal
+**** as long as the cost is admissible, the search will be optimal
+***** straight line distance will never overestimate the actual road cost of getting from a to b
+*** optimality
+**** if sub-optimal goal node G2 appears in the fontier, h(G2) = 0
+**** suppose C* is the cost of the optimal solution
+***** F(G2) = g(G2) + h(G2) = g(G2) > C* since G2 is sub-optimal
+**** suppose node n in the frontier is on an optimal solution path, if h(n) does not overesitmate the cost of completing the solution path, f(n) = g(n) + h(n) <= C* 
+**** now f(n) <= C* <= F(G2), so G2 will not be expanded
+** Best of Both
+*** A* combines best parts of Uniform-Cost and Best-First
+*** we want to use the cost so-far to allow optimality and completeness, while at the same time using heuristic to draw us toward the goal
+** Admissible Heuristics
+*** 8-tile puzzle
+**** h1(n) = number of misplaced tiles
+**** h2(n) = total Manhattan distance (number of squares from desired location of each tile)
+**** dominance
+***** if h2(n) >= h1(n) for all n (both admissible), then h2 dominates h1 and is better for search
+***** h1 is too conservative and will always be lower than h2
+***** using h1 will expand at least as many nodes as A* using h2
+***** therefore, A* with h2 is more informed
+****** heuristics with higher value are better as long as they don't overestimate
+** Properties of A*
+*** usually much more efficient than blind search alg
+*** space is usually the more serious problem
+**** usually runs out of space way before it runs out of time
+** A* memory management
+*** beam search
+**** simple solution: chop the end of the fontier when a fixed limit is reached
+***** eg. k best states are selected
+**** problem
+***** introduces incompleteness
+***** also gives up optimality
+***** could discard the node that is needed for the optimal path

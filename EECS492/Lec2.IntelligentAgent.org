@@ -1,0 +1,92 @@
+#+TITLE: Lec2 Intelligent Agent
+#+DATE: Sun Jan 24 14:30:19 2021 
+
+* Lecutre 2 - Intelligent Agents
+
+* Properties of Task Environment
+** Fully observable vs partially overvable
+*** access to the complete state of the environment, all aspects that are relevant to the cohice of the action
+**** crossword puzzles vs driving taxi
+** Deterministic vs stochastic
+*** whether the next state is completely determined by the current state and the action executed by the agent
+**** simple vaccum cleaner vs driving taxi
+** episodic vs sequential
+*** whether the current decision is dependent on a previous decision
+**** image classification vs playing chess
+** static vs dynamic
+*** whether the environment can change
+** discrete vs continuous
+*** state of the env
+** single agent vs multiagent
+*** number of agents in the env
+**** crossword puzzles vs playing chess
+** known and unknown
+*** refers to the agent's state of knowledge about the law of physics of the environment
+* designing agents
+** job of ai is to design an agent program that implements the agent function
+** assume the program will run on some sensors and actuators -> architecture
+*** agent = architecture + program
+*** uses the sensors and actuators along with the program to create the architecture
+* reflex agents
+** what is the world like now?
+** what action should I take now based on these condition-action rules
+*** if else statements
+* model-based reflex agents
+** has state
+** what the world is like now
+*** how the world evolves
+*** what my actions do
+*** condition-action rules -> what action should I do now
+** the action uses some extra knowledge about the env
+* goal-based agents
+** has a specific goal
+*** influences the decision
+* utility-based agents
+** a measure of the utility of a state
+** what it will be like if i do action A
+** how happy i will be if in such a state
+** what action should i perform now
+* learning-based agents
+** critic
+** learning element
+** problem generator
+** performance element
+* problem solving such as search
+** an inital state
+** set of actions (functions that map states to other states)
+** a goal test
+** a cost function (optional)
+* problem formulation
+** initial state: at Arad
+** successor function S(x) = set of action-state pairs
+** goal test can be explicit, eg x = at Bucharest
+** path cost (additive)
+*** sum of distance, number of actions executed
+* measuring problem-solving performance
+** completeness: is the algorithm guaranteed to find a solution when there is one
+** optimality: does the strategy find the optimal solution
+** time complexity: how long does it take to find a solution
+** space somplexity: how much memory is needed to search
+* searching strategies
+** time and space complexity measured in terms of
+*** b: max branching factor of the search tree
+**** how many children a node can have
+*** d: depth of the lest-cost solution
+*** m: maximum depth of the state space (may be infinite)
+* breadth-first search
+** expand shallowest unexpanded node
+** FIFO queue, i.e., new successors are expanded at end
+*** goal test applied to each node when it is generated rather than when it is selected for expansion
+** complete if b is finite
+** O(b^d) time complexity
+** O(b^d) space complexity
+** optimal if cost = 1 per step; not optimal otherwise
+*** all the costs have to be equal
+**** cost must be constant else not optimal
+* uniform-cost search
+** expand least-cost unexpanded node
+** priority queue
+** diff from bfs
+*** goal test applied to a node when it is selected for expansion (not when it's generated as in BFS)
+*** a test is added in case a better path is found to a node currently on the frontier
+
