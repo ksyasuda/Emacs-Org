@@ -1,6 +1,12 @@
 #+TITLE: Design Patterns
 #+DATE: Sat Dec 12 21:45:09 2020 
 
+* one slide summary
+** design patterns are general, reusable solutions to commonly-occuring problems
+** separate the structure of a system from its implementation
+*** apply in almost all OO languages
+** every design has tradeoffs
+*** OO design patterns often trade verbosity or erfficiency for extensibility
 * patterns in non-software design
 ** high level advice
 *** consider code change as a certainty
@@ -10,13 +16,26 @@
 *** consider multiple designs
 * Structural patterns
 ** ease design by identifying simple ways to realize relationships among entities
+*** to make real, to make explicit
+*** in software build new interfaces from existing ones
+*** hide implementatino details
+*** provide clener interfaces
 ** adapter design pattern is a structural design pattern that converts the interface of a class into another interface client expects
 * Adapter examples
 ** implementing a stack interface using a LinkedList interface
+** Adapter design pattern is a strucural design pattern that converts the interface of a class into another interface clients expect
+** implement a stack using a linked list interface
+** autograder used for this course securly runs student code
+*** does this via an adapter around containzerization library
 * composite design pattern
 ** allows clients to treat individual objects and groups of objects uniformly
+*** selecting and moving objects in PowerPoint
+** suprisingly intuitive to use for a human
+*** hard to do in practice
+** adding them later is super painful
 * proxy design pattern
 ** provides a surrogate or placeholder for another object to control access to it
+*** std::vector is a surrogate or placeholder
 * creational design patterns
 ** avoid complexity by controlling object creation so that objects are created in a manner suitable for the situation
 ** make system independent of how its objects are created
@@ -24,18 +43,29 @@
 *** control how and when objects are used
 *** overcome language limitations
 **** eg no default arguments
-*** hide polymorphic traits
+*** hide polymorphic types
 ** Named constructor idiom
 *** you declare the class's normal constructors to be private or protected and make a public static creation method
 * Factory pattern variant
 ** creational design pattern that uses a factory methods to create objects without having the return type reveal the exact subclass
 ** variants
 *** may encounter implementations in which special methods create the right type
+* Common problem
+** want to create and use polymorphic objects without exposing their types to the client
+** typical solution is to write a function that creates the object and return that
+* Factory pattern
+** creational pattern that uses factory methods to create objects without having the return type reveal the exact subclass created
 * abstract factory design pattern
 ** encapsulates a group of factories that hav a common theme without specifying their concrete class
 * Singleton design pattern
 ** restricts the instantiation of a class to exactly one logical instance
 ** ensures that a class has only one logical instance at runtime and provides a global point of access to it
+** can get the instances // named ctor
+** private instance
+** ex:
+*** public way to getInstance
+**** check if we already have the instance created if not make it
+**** single private global variable that is updated everywhere
 * should only use singleton pattern when current or future requirements dictate that only one instance should exist
 ** singleton is not a lisense to make everything global
 * observer pattern allows dependent object to notified automatically
