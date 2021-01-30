@@ -1,0 +1,25 @@
+#+TITLE: Chapter1
+#+DATE: Sat Jan 30 15:45:51 2021 
+
+*  Introduction
+** agent
+*** just something that acts
+*** computer agents are expected to do a lot: operate autonomously, perceive their environment, persist over a prolonged time period, adapt to change, and create a pursue goals
+** rational agent
+*** one that acts so as to achieve the best outcome or, when there is uncertainty, the best expected outcome
+* Foundations of AI
+** first nontrivial algorithm is thought to be Euclid's algorithm for computing GCD
+** algorithm comes from al-Khowarazmi, a Persian mathematician of the 9th century, whose writings also introduced arabic numberals and algebra to europe
+** boole and others dicussed algs for logical deduction
+** Godel showed that limits on deduction do exist
+*** incompleteness theorem
+**** showed that in any formal theory as strong as Peano arithmetic (the elementary theory of natural numbers), there are true statements that are undecidable in the sense that they have no proof within the theory
+*** also menas that some functions on the integers cannot be represented by an algorithm - that is, they cannot be computed
+** notion on tractability has had an even greater impact
+*** problem is called intractable if the time required to solve instance of the problem grows exponentially with the size of the isntances
+*** distinction between polynomial time and exponential time functions
+*** has not been proved that NP-C problems are necessarily intractable, most beleive it is
+** third great contribution is probability
+*** thomas bayes proposed a rule for updating probabilities in the light of new evidence
+** decision theory, combines probability theory with utility theory, provides a formal and complete framework for decisions made under uncertainty
+*** that is, in cases where probabilistic descriptions appropriately capture the decision marker's environment
