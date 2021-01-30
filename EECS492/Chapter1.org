@@ -23,3 +23,6 @@
 *** thomas bayes proposed a rule for updating probabilities in the light of new evidence
 ** decision theory, combines probability theory with utility theory, provides a formal and complete framework for decisions made under uncertainty
 *** that is, in cases where probabilistic descriptions appropriately capture the decision marker's environment
+** development of game theory included the surprising result that, for some games, a rational agent should adopt policies that are randomized
+** economists did not address the question of how to make rational decisions when payoffs from actions are not immediate but instaead result from several actions taken in sequence
+*** topic was studied in field of operations research
