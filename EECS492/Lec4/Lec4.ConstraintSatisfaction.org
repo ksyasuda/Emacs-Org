@@ -1,0 +1,139 @@
+#+TITLE: Lec4 Constraint Satisfaction
+#+DATE: Tue Feb  2 13:58:15 2021 
+#+STARTUP: inlineimages
+
+* neural translation system: an example of success in deep learning
+** google translate is pretty good now, much better than the old best software for translations
+* hill climbing
+** never goes downhill
+** guaranteed to be incomplete
+* purely random walk
+** moving to a success chosen uniformly at random from a set of successors
+** complete but extremely inefficient
+* how to combine them to have both efficiency and completeness
+* simulated annealing
+** have a schedule that maps time to temperature
+*** temp starts high, gradually lowers down
+** instead of best move, pick random move 
+** if move improves, accept;
+*** else accept with a prob < 1, P = e^ -deltaE/T
+**** deltaE is difference between current state and next state
+**** T is temperature
+***** when temp is high, chance to pick bad move is high
+***** when temp is low, change to pick bad move is low
+*** probablility decreases with 1 badness of move; 2 decrease of temperature
+* Local beam search
+** keep track of k states (k > 1)
+** procedure:
+*** randomly generate k initial states
+*** generate successors for each state
+*** if any successor is a goal, return it and exit
+*** otherwise put all successors into queue and sort
+*** keep k best nodes in the queue and remove the rest, go to step 2
+** example
+*** expand all successors of the nodes in the queue
+*** pick the best of the succesors and put them into the frontier
+**** remove all others that don't fit into the queue
+*** expand all nodes in the queue
+**** pick the best of the successors of nodes in the queue and put them into the queue 
+** how is this different from k random restarts
+**** random restart
+***** each search thread is independent
+**** LBS useful information is passed along parallel threads
+**** benefit: algorithm can quickly abandon unfruitful searches and move resources to where progress is made
+**** stochastic beam search: choose best k successors randomly, e.g. prob of selecting each successor proportional to its value
+***** leads to genetic algorithm
+****** picking k successors randomly
+* genetic algorithm
+** variation of the sochasitc beam search
+** population: start with k randomly generated states
+** individual: represent each state as a string
+** fitness: rate each state using an objective function
+** operations:
+*** select paris of states at random based on probabilities
+**** different from ususal where we work with one state
+*** identify crossover point randomly
+**** allows alg to decide which part will be given to the children
+*** create offspring by crossing parent strings
+**** generate the next state
+*** each location subect to random mutation
+* 8-queen problem
+[[./images/8Queens.png]]
+** no queen can attack each other (row, col, diagonal)
+** representing states:
+*** row position of each column
+**** for each column, what row position is the queen in
+*** position of the queen in binary
+[[./images/representing-state.png]]
+*** 4 different states
+*** fitness function:
+**** in the picture 24 pairs of queens are not attacking each other
+*** GA example
+[[./images/genetic-alg.png]]
+**** fitness: 24 for the first, 23 for the second, and so on
+**** more fit = better probability
+**** selection
+***** randomly select a crossover point and swap parts
+**** mutation
+***** change that mutations occur to one bit of the number
+*** GA summary
+**** uphill tendency, random exploration, can exchange information across parallel search threads
+**** has an appealing analogy to natural selection
+**** hard to characterize in general and depends on string rep of the states
+**** not generally better than simpler stochastic search methods 
+* local search summary
+** key advantages:
+*** very little memory requirements
+*** can often find reasonable solution in large or infinite state spaces where other approaches are not applicable
+*** often applied in real world applications
+** disadvantages:
+*** incomplete
+*** not optimal
+* Constraint satisfaction problems
+** standard search problem:
+*** state is a black box
+**** arbitrary data structure that supports goal test, successor function, heuristic functions
+*** CSP:
+**** state is defined by variables Xi with values from domain Di
+**** goal test is a set of constraints specifying allowable combinations of values for subsets of variables
+**** Example: Map-Coloring
+[[./images/map-coloring.png]]
+***** 18 solutions to the problem
+***** constraint graph
+****** nodes are variables, arcs to show constraints
+***** varieties of CSP
+****** discrete variables
+******* finite domains, domain size d
+****** how many complete assignments for n variables
+****** O(d^n) complete assignments for n variables
+******* boolean constraints
+******* infinite domains
+******* job scheduling, varibles are start/end days for each job
+******** ex startjob1 + 5 <= startjob3
+******* linear constraint solvable, nonlinear undecidable
+****** continuous variables
+***** varieties of constraints
+****** unary constraints = single variable
+****** binary constraint = pairs of variables
+****** higher-order constraints involve 3 or more variables
+****** preferences (soft constraints), eg. red is better than green, ofen representable by a cost for each variable assignment -> constrainbed optimization problem
+* standard search formulation
+** initial state: empty assignment {}
+** successor function: assign a value to any unassigned variable that does not conflict with current assignment
+*** fail if no legal assignment
+** goal test: current assignment is complete
+** problem: is O(n!d^n) when only O(d^n) assignments
+* backtracking search
+** variable assignments are commutative
+*** wa = red, nt = green == nt = green, wa = red
+** only need to consider assignments to a single variable at each node
+*** ther are d^n leaves
+** dfs for CSP with single-variable assignments is called backtracking search
+* backtracking improvements
+** dfs is a blind search, doesn't consider any outside knowledge
+** could use heuristic
+** general-purpose methods can give huge gains in speed
+1. which variable should be assigned next
+2. in what order should its values be tried
+3. can we detect inevitable failure early
+4. can we take advantage of problem structure
