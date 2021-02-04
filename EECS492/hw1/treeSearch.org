@@ -1,0 +1,20 @@
+#+TITLE: Tree Search
+#+DATE: Wed Feb  3 14:11:49 2021 
+#+STARTUP: inlineimages
+
+[[./images/p2-tree.png]]
+
+* BFS
+** frontier:  144, 233, 377, 610, 987
+** visited: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
+* DFS
+** frontier: 144, 3
+** visited: 1, 2, 5, 34, 55, 8, 89
+* IDS
+** visited: 1; 1, 2, 3; 1, 2, 5, 8, 3, 13, 21; 1, 2, 5, 34, 55, 8, 89 
+* UCS
+** frontier: 34(6)
+** visited: 1, 3 (1), 2 (2), 13(2), 21(2), 8(3), 233(3), 377(3), 987(3), 5(4), 144(4), 610(4), 55(5), 89(5)
+* Greedy Best First Search
+** frontier: 5, 8, 3
+** visited: 1, 2

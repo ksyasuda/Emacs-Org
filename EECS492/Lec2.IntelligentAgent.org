@@ -5,7 +5,7 @@
 
 * Properties of Task Environment
 ** Fully observable vs partially overvable
-*** access to the complete state of the environment, all aspects that are relevant to the cohice of the action
+*** access to the complete state of the environment, all aspects that are relevant to the choice of the action
 **** crossword puzzles vs driving taxi
 ** Deterministic vs stochastic
 *** whether the next state is completely determined by the current state and the action executed by the agent
