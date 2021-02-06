@@ -1,0 +1,71 @@
+#+TITLE: Lec6 Propositional Logic
+
+* knowledge based agents
+** one that chooses its actions at least in part on the basis of the contents of its knowledge
+** both need to have knowledge base = set of all sentences in a formal language
+** declarative approach to building an agent
+*** tell it what it needs to know
+*** ask itself for answers from the KB
+*** both may involve inference deriving new sentences from old
+**** if a->b then b->c should be able to derive a->c
+**** needs to be able to infer things such as this
+* knowledge representation
+** knowledge representation is a formal scheme that dictates how an agent is going to represent its knowledge
+*** syntax: determines possible strings
+*** semantics: meaning behind the syntax
+**** mapping from sentences to meanings
+* reasoning:
+** knowledge based cannot be a simple table
+** allow agents to make new conclusions and infer from the knowdge base
+*** things that are not already represented in the base
+* wumpus world
+[[./images/wumpusworld.png]]
+** Agent
+*** agent can move in the blocks
+**** has an arrow
+*** wants to find the gold
+*** there exists a wumpus in the world
+**** if they in the same square, agent dies
+*** bottomless pit as well that agent needs to avoid
+*** has actuators to allow it to move up, down, left, and right
+** monster smells
+*** if agent is adjacent to it, he can tell
+** if pit or gold adjacent
+*** the agent is able to see it
+** Agent first couple of moves?
+*** start at (1, 1)
+*** go to (2, 1)
+**** next to the monster so go back to (1, 1)
+*** go to (1, 2)
+**** don't to right into the pit
+*** go to (2, 2)
+** how can we make an agent do this though process by themselves
+* Logic in general
+** logics are fomal languages for representing information such that conclusions can be drawn
+* models
+** logicians typically think in terms of models
+*** model instead of possible world
+** we say m is a model of a sentence alpha if alpha is in m
+** M(alpha) is the set of all models of alpha
+* Entailment
+** means follow logically
+** sentence alpha entails beta: a |= b
+*** if and only if in every model in which alpha is true, beta is also true
+** KB (Knowledge Base) entails sentence alpha: KB |= alpha
+*** if and only if alpha is true in all models where KB is true
+** KB containing "the Giants won and the Reds won" entails "the Giants won or the Reds won"
+*** yes because in every case where b is thre, a is true as well
+* entailment in wumpus world
+** situation after detecting nothing in 1,1 move right, breeze in 2,1
+*** consider possible models for 7s assuming only pits
+*** 3 boolean choices: 8 possible models
+* inerence
+** sentence a can be derived from KB by procedure i
+* prop logic syntax
+* validity and satisfiable
+** sentence is valid if it is true in all models
+** sentence is satisfiable if it is true in some models
+** sentence is unsatisfiable if it is true in no models
+* validity is connected to inference via Deduction Theorem
+** a |= b if and only if a=>b is valid
+* satisifability is connected to inference via the following proof:

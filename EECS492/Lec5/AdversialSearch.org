@@ -6,9 +6,75 @@
 ** variable assignemtns are communative
 *** order of assignments does not matter
 *** final assignemnt is what matters
+* improving backtracking efficiency
+** uninformed search strategy
+** use hueristics to speed up finding solution
+*** which variable should be assigned next
+*** in what order should its value be tried
+*** can we detect inevitable failure early
+*** can we take advantage of problem structure
+*** Most Constrained Variable
+**** choose the variable with the fewest legal values:
+***** minimum remaining values (MRV)
+**** why?
+[[./images/most-constrained.png]]
+***** assign to the state that is blue next because that decision will impact the colors of the rest of the states
+****** by making that one blue, all the other three cannot be blue
+**** what if there is a tie?
+***** use a degree heuristic
+***** west and queensland need red 
+****** can use degree to choose
+****** since the one on the right has the ability to affect others, we choose that one in the case of a tie
 * Least constraining value
 ** given a variable, how to choose which to assign first
 ** what color to assign to the next state eg (blue or red)
+** assign the color that conflicts least with other states
+*** so that you can't choose a color that would make one state be unable to be colored
 * forward checking
+[[./images/forward-check.png]]
 ** keep track of remaining legal values for unassigned variables
 ** backtrack when a variable has no legal values
+** since at level three, nt and sa both can only have blue left, and they are adjacent to each other, the solution is unsolvable with the current choices so backtrack
+* Arc consistency
+** x -> Y is consistent iff
+*** for every value x of X there is some allowed y for Y
+** since nsw has red and blue and sa has only blue
+*** sa -> nsw is fine since nsw has red
+*** nsw -> sa not fine since sa only has blue for the nsw red
+*** remove the blue value from NSW to make it arc consistent
+**** this may cause the neighbor to become arc inconsistent
+***** have to further remove values from neighbors until it is consistent
+*** arc consistency detects failure earlier than forward checking
+*** can be run as a preprocessor or after each assignment
+* problem structure (backtracking)
+[[./images/problem-structure.png]]
+** can find the solution to multiple subproblems and combine the results
+** each sub-problem has c variables out of n total, each variable can have d values
+** worst case solution cost is d^c n/c linear in n
+** eg n = 20 d = 2 c = 20
+** rare to be able to split into independent subproblems
+** usually interested in variables that are related to each other
+* tree structured CSP
+** if the constraint graph has no loops, the CSP can be solved in O(nd^2) time
+*** compare to general where worst case is d^n
+** any variable can be root cuz tree structure
+* lot of problems cannot be translated into tree structure
+** instantiate a variable, prune its neighbors
+** cutset
+*** take out one that is a loop, maybe doesn't need to be a loop
+* Game as a search problem (adversial search)
+** initial state: board position, player
+** sucessor func: list of (move, state) pairs, each indicating a legal move and the resulting state
+** terminal text: game is over?
+** utility func: numerical value for the terminal state +1, -1, 0
+* Minimax
+** optimal strategy = at least as good as any other strat
+** from among the moves available to you, take the best one
+** where the best one is determined by a search using the MiniMax strat
+[[./images/minimax.png]]
+** max chooses A1
+[[./images/minimax-equation.png]]
+* Alpga-Beta pruning
+** minimax performs a complete dfs
+** often can ignore entire sections of the search space and come up with the same answer
+** don't explore a line of play that is already worse than one you have already discovered
