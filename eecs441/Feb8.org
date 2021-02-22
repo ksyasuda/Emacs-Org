@@ -1,0 +1,37 @@
+#+TITLE: Feb8
+#+DATE: Mon Feb  8 16:35:27 2021 
+
+* 8 minute presentation
+** presentation on a company
+** 3 bullet points on the screen
+*** couple of words on each point
+*** no sentences
+*** or 3 images on each slide with a phrase
+** mission statement, slogan, or a quote can be full sentences
+* DraftKings
+** three bullets with one image on the left
+*** okay, okay
+*** might want three images associated with the words
+*** image->words, image->words
+*** same layout over and over
+**** consistency
+*** one graph and three bullets
+**** simple graph
+**** with complicated graph, no bullets
+*** three images no bullets
+*** image three bullets
+* Instagram
+** cover page
+** pictures no words
+** pictures with captions
+** images, lots of them
+** financials without graph, don't necessarily need one
+** not a lot of writing on the pages
+*** sometimes the graphs are too busy
+**** need to make them more simple
+** need a competition chart
+** need to have a prediction
+** need to have references at the end
+* don't overcomplicate
+* use voice
+* couple of the slides might need to be unpacked and become separate slides
