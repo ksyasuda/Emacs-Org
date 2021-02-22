@@ -1,0 +1,55 @@
+#+TITLE: Prolog
+#+DATE: Thu Feb 18 11:34:27 2021 
+
+* attend talk on friday and get free points for 492 2-3pm
+* programming in logic (prolog)
+** define facts, relations, etc
+* don't assume that, just because you have provided all the relevant facts, and rules, Prolog will always find them
+** must bear in mind when you write Prolog programs how Prolog searches through the DB and which variables will be instantiated when one of your rules is used
+** general rule: put facts before rules whenever possible
+* Cut (!)
+** cut allows you to tell Prolog which previous choices it need not consider again when it backtracks through the chain of satisfied goals
+[[./images/cut.png]]
+*** the ! means when you only find the first overdue book
+**** once it is found, you don't try another book
+*** blocks backtracking if you want to
+**** will pick up after the !
+** foo:- a, b, c, !, d, e, f
+*** reg backtracking until c
+*** then backtracking after the cut only
+**** if d fails, then cannot go back
+** program will be faster, occupy less space, and without it program can run in unintended ways
+* Prolog and Parsing
+** parsing problem: given a grammar for a language, constructing a prsing tree for a sentence of the language
+** prolog grammmar rule formalism can be used to conveniently build a parser
+* NL Parsing
+** context free grammar
+*** define the syntax of the language but not how to recognize or assign structure
+** parsing algs
+*** specify how to recognize the strings of a language and assign each string one or more syntactic structures
+** parse trees
+*** represents the strcture of the sentence given the grammar
+* context free grammar
+** set of terminals (words)
+** set of non-terminals (constituent of language)
+** set of rules of the form A->alpha, where alpha is a string of zero or more terminals and non-terminals
+* some NP (noun phrase) rules
+** NP -> Det Nominal
+** NP -> ProperNoun
+** Nominal -> Noun | Nominal Noun
+[[./images/grammar.png]]
+*** find the right parse tree among all possible trees
+*** search space defined by the grammar
+*** constraints proved by the input sentence and grammar
+* Derivations
+** sequence of rules applied to str that accounts for that string
+*** cover all elements of string
+*** covers only elements in the string
+**** no more and no less than the input string
+* Top-Down Search
+** find tree rooted in S, then start with rules that give us an S
+* comparing top-down and bottom-up
+** top-down never explore illegal parses but wastes time on trees that can never match the input
+** bottom-up never explores trees inconsistent with input but wastes time exploring illegal parses
+** prolog does the parsing for you automaticaly
+*** only need to specify grammar

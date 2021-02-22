@@ -61,6 +61,9 @@
 *** 3 boolean choices: 8 possible models
 * inerence
 ** sentence a can be derived from KB by procedure i
+** soundness means whenever inference procedure
+*** whenever KB |i alpha, it is also true that KB |= alpha
+** completeness means when KB |= alpha, it is also true that KB |i alpha
 * prop logic syntax
 * validity and satisfiable
 ** sentence is valid if it is true in all models
@@ -69,3 +72,37 @@
 * validity is connected to inference via Deduction Theorem
 ** a |= b if and only if a=>b is valid
 * satisifability is connected to inference via the following proof:
+* Wumpus World Sentences
+** Pij true if pit at i, j
+** Bij true if there is breeze at i, j 
+** if breeze, pit can be adjacent
+*** B11 <=> (P12 V P21)
+*** B21 <=> (P11 V P22 V P31)
+* Inference example
+[[./images/inference-example.png]]
+** R6: B11 => P12 V P21 A (P12 V P21) => B11 
+* Inference by Resolution
+** KB |= alpha, we show KB A -alpha is unsatisfiable
+1. get the expression of -alpha
+2. compute KB A -alpha
+3. If (KB A -alpha) always returns false, then unsatisfiable
+*** in order to do this, KB A -alpha has to be first converted to CNF
+**** conjuctive normal form (conjunction of disjunction of literals)
+* Resolution Rule
+[[./images/resolution-rule.png]]
+** the process will always be true
+** the procedure is valid
+** can be extended to a more general sense
+** if two disjunction of literals in the numerator and they are complementary, they can cancel out
+** resolution is sound and complete for propositional logic
+*** only need to convert to CNF (Conjunction of Clauses)
+* convert to CNF
+** B11 <=> (P12 V P21)
+*** get rid of bidirectional
+** B11 => P12 V P21 A (P12 V P21) => B11
+*** implication of elim
+** -B11 V P12 V P21 A -(P12 V P21) V B11 
+*** demorgans
+** -B11 V P12 V P21 A (-P12 A -P21) V B11
+*** distribution
+** -B11 V P12 V P21 A -P12 V B11 A -P21 V B11

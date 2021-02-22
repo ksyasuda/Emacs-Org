@@ -1,0 +1,169 @@
+#+TITLE: Lec7 Fol Logic
+
+* Summary of prop logic
+** atomic props are true or false
+** complex props built up fromatomic ones with logical operators
+* limits of prop logic
+** limited expressive power
+** cannot say "pits cause breezes in adjacent squares"
+*** has to write one sentence for each square
+** tedious to make general statement about classes of objects
+* first-order logic assumes the world contains facts, first-order logic assumes the world contains
+** objects: people, houses, numbers, wars, stuff
+** relations: red, round, prime, bigger than, inside of, etc
+** functions: father of, best friend
+* FOL
+** constants: UM, CSE, John
+** predicates: LocatedIn, StudentAt
+** functions: LocationOf, MajorOf
+** vars: x, y, a, b
+** connectives: -, A, V, =>, <=>
+** equality: =
+** quantifier: for all, there exists
+*** universal, existential quantifier
+* atomic sequences
+** predicate(term1, ..., termn)
+** term = function(term1, ..., termn)
+** eg. StudentAt(John, UM), MajorOf(John) = CSE
+* complex sentences
+* quantified sentences
+** Quantifier <variables> <sentence>
+** allow us to make statements about unknown obj
+** allow us to make statements about classes of objects
+* universal quantification
+** Vx EnrolledIn(x, EECS492) => smart(x)
+** Vx P(pred) is equivalent to the conjunction of instantiation of P
+*** EnrolledIn(Nathan, EECS492) => Smart(Nathan)
+A EnrolledIn(Chris, EECS492) => Smart(Chris)
+...
+**** for all elements in x
+** common mistake: using A (and) as the main connective with V (for all)
+*** Vx EnrolledIn(x, EECS492) A Smart(x)
+* existential quantification
+** E <variable> <sentence>
+** someone in EECS492 is smart
+*** Ex EnrolledIn(x, EECS492) A Smart(x)
+*** if we did Ex EnrolledIn(x, EECS492) => Smart(x)
+**** if P => Q and P is false, Q is true
+**** therefore if there is one person who is not enrolled in EECS492, then the whole statement is true
+* quantifier duality
+** each can be expressed using the other
+** Vx Likes(x, IceCream) = -Ex -Likes(x, IceCream)
+*** if all x likes ice cream, there does not exist an x who does not like ice cream
+* equality
+** term1 = term2 is true under a given interpretation if and only if term1 and term2 refer to the same object
+* exercise
+** brothers are siblings
+*** Ax, y Brother(x, y)) => Siblings(x, y)
+** "sibling" is symmetric
+*** Vx,y Sibling(x, y) <=> Sibling(y, x)
+** one's mother is one's female parent
+*** Vx,y Mother(x, y) <=> (Female(x) A Parent(x, y))
+** a first cousin is a child of a parent's sibling
+*** Vx, y FirstCousin(x, y) <=> Ep,s (Parent(y) A Sibling(p, s)) 
+* inference
+** in FOL involves showing that some sentence is true, given a current knowledge base, by exploiting the semantics of FOL to create new knowledge-base that contains the sentence in which we are interested
+** how to derive new statement from the KB
+* Variables
+** big part of FOL involves keeping track of all the variables
+** substitution lists are the means used to track the value, or binding, of variables as procesing proceeds
+*** var/tem, var/term, var/term
+* examples
+** Cat(Felix)
+** Vx Cat(x) => Annoying(x)
+* inference in FOL
+** reducing first-order inference to prop inference
+** unification
+** gernealized modus ponens
+** forward/backward chaining
+** resolution
+* Universal Instantiation
+** Every instantiaion of a universally quantified sentence is entailed by it:
+[[./images/instantiation.png]]
+*** ground term = specific entity that it is bound to
+**** not a variable
+*** replace the variable with the term g in the domain
+* Existential Instantiation
+** for any sentence alpha, variable v, and constant symbol k
+*** k cannot appear elsewhere in the KB
+[[./images/existential.png]]
+**** replace x with a new constanct C1
+**** There is someone that has this property
+**** provided C1 is a new constant symbol -> Skolem Constant
+* reduction to prop inference
+** KB contains: Vx EnrolledIn(x, EECS492) A Junior(x) => Smart(x)
+** instantiate the universal sentence in all possible ways, we have
+[[./images/instant2.png]]
+*** lots of statements that we don't actually need
+*** generates lots of irrelevant statements
+* unification
+** we can get the inference immediately if we can find a substitution theta UNIFY(alpha, beta) = theta if alphatheta = betatheta
+** alpha and beta are two statements
+[[./images/unification.png]]
+1. p=john knows everyone q=john knowns jane
+   a. {x/Jane}
+      a. substitute x with Jane to make the sentence true
+2. p=John knows everyone q=everyone knows Mary
+   a. {x/Mary, y/John}
+3. p=john knows everyone q=y knows y's mother
+   a. {x/Mother, y/John}
+4. p=john knows everyone q=everyone knows mary
+   a. fail
+   b. should be able to unify
+      a. since only one variable used across both predicates, we cannot unify
+   c. use y instaed in one of them
+* Generalized Modus Ponens
+[[./images/gmp.png]]
+** variables are univeral quantified
+** if we can find a substitution for the variables, and we can apply modus ponens, we can apply the substitution
+** in order to apply, KB needs to have definite clauses
+*** exactly 1 positive literal
+* Definite Clauses
+** Horn clause is a disjunction of literals of which AT MOST one is positive
+** definite clause is a horn clause with EXACTLY 1 positive literal
+* example KB
+** law says crime to sell weapons to enemies
+** Nono (country) has more missiles and all of its missles sold by Colonel West, who is American
+** prove that Col West is a criminal
+** info
+*** crime to sell weapons to hostile nations
+**** american(x) A weapon(y) A sells(x,y,z) A Hostile(z) => criminal(x)
+*** Nono has some missiles
+**** Ex Owns(Nono, x) A Missile(x)
+*** Owns(Nono, x) A Missile(x) => Sells(West, x, Nono)
+*** Missiles are weapons Missile(x) => Weapons(x)
+*** enemy of america counts as hostile
+**** Enemy(x, america) => hostile(x)
+*** west is american
+**** american(west)
+*** Nono is enemy of america
+**** enemy(nono, america)
+** forward chaining:
+*** like data driven approach
+*** generate new facts based on the rules
+*** then generate new facts based on the new rules
+*** America(west) Missiles(M1) Owns(M1) Enemy(Nono)
+**** Weapon(M1): {x/M1}
+**** Owns(Nono, M1)
+***** Sells(West, M1, Momo)
+**** Enemy(x, American) => Hostile(x)
+***** enemy(nono, america) => hostile(nono)
+**** x/West, y/M1, z/Nono
+** backward chaining:
+*** when a query q is asked
+**** if a matching q' is found, return substitution list
+**** else for each rule q' whose consequent matches q, attempt to prove each antecedent by backward chaining
+**** goal-directed method.  basis for prolog
+*** EX:
+*** Criminal(west) <- want to know
+**** x/west
+*** American(west) Weapon(y) Sells(West,y,z) Hostile(y)
+*** Weapon(y) -> consequence of Missile(y)
+**** Missile(y)
+***** y/M1
+*** Missile(M1) => Weapon(M1)
+*** Sells(West,M1,z) -> consequence of Owns(Nono, M1)
+**** z/Nono
+*** Hostile(z)
+**** consequence of Enemy(Nono, America) => Hostile(Nono)
+***** x/Nono

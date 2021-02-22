@@ -1,0 +1,93 @@
+#+TITLE: Monica Lam Talk
+#+DATE: Fri Feb 19 14:01:01 2021 
+#+STARTUP: inlineimages
+
+* Professor of open virtual assistant labratory at Standord
+* next-gen computer interface
+** the human interface
+*** possible because of nlp and machine learning
+** queries of knowledge
+** dialogues: intuitive software interfaces
+*** interact by voice
+**** so much better than menu-driven approach
+***** not talking about a limited set of choices
+***** ongoing dialogue between you and computer
+** programming interface: end-user task automation
+*** in the future, everyone can automate their tasks
+* virtual assistants
+** unifrom voice interface
+** holistic personal assistance
+* duopoly
+** alexa has 70% of the US market, google assistant takes up the rest basically
+*** alexa has 100k 3rd-party skills and 60k IoT's
+** business: control through intermediating business
+*** has control of everything like where you buy groceries
+** society: innovation, privacy, low-resource languages, non-profit causes
+* goals:
+** advance voice technology and make it available in open domain
+** open, private assistant for consumers
+** let user have an alternative that honors privacy
+*** little bit like Firefox
+** there needs to be competition to keep people honest
+* annotations are not good enough
+** alexa, google assistant has realy poor NLP
+*** much better than before but long way to go
+** natural language sentences are engineered
+** must understand new sentences not just common ones
+** language is compositional
+*** exponential number of combos in a sentences, in a dialogue
+**** MultiWoZ: a multi-domain transactional dataset
+*** reannotated twice: 30% errors
+**** had to reannotate 30% of the sentences
+*** scaling to all domains are prohibitively expensive
+* not doable by just a couple of companies
+** too complex and expensive and large of a problem to try to make this work for everyone of all languages
+* don't annotate, synthesize
+** cover what the computer knows
+** generate correct-by-construction dialogues
+*** it's correct because we made it correct
+** throw in a few-shot of real data to prevent overfitting
+* encapsulate knowhow in tools
+* ThingTalk
+** language for virtual assistants
+*** is an executable
+*** there is a compiler
+** generate training data that is correctly annotated and train the Neural Semantic Parser
+** compiler for natural language
+* how to get good training data
+** templates to generate large collection of basic sentences
+** automate paraphrasing of clunky sentences
+** are a lot of good pre-trained language models
+*** don't really know what they are talking about
+**** know correlation of words
+**** the relationships between them
+** generate awk sentences and use the pre-trained networks to find equivalent sentences and add that in as the training data
+* scale
+** enable reuse
+*** standardized representation: ThingTalk
+*** open-source tools, training data, models
+** standardize the language and tools
+* empower the 20M+ voice interface developers
+* complex or long-tail questions from crowdsourcing
+** show restaurants in San Francisco rated higher than 4.5
+* ThingTalk but actually
+** queries, dialogues as interfaces, end-user task automation
+[[./thingtalk.png]]
+** training data:
+*** database + API Schemas
+* bad data=bad semantic parser
+* Filtering stuff
+[[./filtering.png]]
+* Schema2QA restaurants
+** genie: few-show training synthetic
+*** + a few manually translated sentences
+** SOTA
+*** translate foreign sentences to english with parameter substitution
+*** use english semantic parser
+** multi-lingual question answering with local entities
+* translation
+** take english sentence first
+* genie tools, thingpedia, assistant
+* empower developers, open voice web, federated, private
+* Join in and collaborate
+** https://oval.cs.stanford.edu

@@ -1,0 +1,59 @@
+#+TITLE: Lec8 Fol Inference
+
+* Resolution
+** if there are complementary literals in the numerator, we can take them out and disjunct the rest of the literals
+[[./images/res.png]]
+*** -rich and rich can go away and let with Unhappy(x)
+*** with theta={x/Ken}
+* convert FOL to CNF
+** everyone who loves all animals is loved by someone
+** Vx [Vy Animal(y) => Loves(x, y)] => [Ey Loves(y, x)]
+** Conversion
+1. Eliminate implication
+   a. Vx [-Vy -Animal(y) V Loves(x, y)] V Ey Loves(y, x)
+2. Move negation inward
+   a. Vx [Ey Animal(y) A -Loves(x, y)] V Ey Loves(y, x)
+3. Standardize variables
+   a. Vx [Ey Animal(y) A -Loves(x, y)] V Ez Loves(z,x)
+      a. get rid of the second y variable and change to z
+4. Skolemize: remove existential quantifiers by elimination
+   a. Vx [Animal(F(x)) A -Loves(x, F(x))] V Loves(G(x),x)
+   b. F and G are skolem functions
+5. Drop universial qualifier
+   a. [Animal(F(x)) A -Loves(x,F(x))] V Loves(G(x),x)
+6. Distribution or over and
+   a. [Animal(F(X)) A Loves(G(x),x)] A [Loves(G(x),x) V -Loves(x, F(x))]
+* Prolog
+** it is a programming language
+* programming in Locig (Prolog)
+** you define facts, relations, etc Most job is done by computer based on locial inference
+** programming in Prolog consists of:
+*** specifying some facts about objects and their relations
+*** definins some rules about objects and their relations
+*** asking questions about objects and their relationships
+* Simple program
+[[./images/simple-prolog.png]]
+* structure and trees
+** prolog is built on terms
+** a term can be a constant, a variable, or a structure
+* Lists
+** list very common data structure in non-numeric programming
+** ordered sequence of elts
+** list can represent practically any kind of structure
+*** parse trees, grammars, graphs, etc
+** manipulated by splitting them up based on a head and tail
+*** [X/Y]: head X: element and tail [Y]: list
+*** [a,b,c]: head a: elt and tail [b, c]: list
+*** [[the, cat], sat]; head [the, cat], tail: [sat]
+**** tail is always a list
+* recusrive search
+[[./images/recursive-search.png]]
+** implement functions using predicates
+** if x is the first element of a list, then true
+** if x is a member of the tail, then x is a member of the entire list
+*** can check if any element is a member of the list
+* search for solution
+** important how the facts/rules are organized
+[[./images/search-problems.png]]
+*** person(mary) will infinite loop
+* must keep in mind how prolog searches and whcih variables will be instantiated when one of the rules are used
