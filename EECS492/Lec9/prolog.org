@@ -48,6 +48,13 @@
 **** no more and no less than the input string
 * Top-Down Search
 ** find tree rooted in S, then start with rules that give us an S
+** work way down from there to the words
+** problems
+*** create a lot of trees that are never gonna satisfy the input sentence
+* bottom-up parsing
+** want trees that cver the input words
+** start with trees that link up with the words in the right way
+** work way up from ther to larger and larger trees
 * comparing top-down and bottom-up
 ** top-down never explore illegal parses but wastes time on trees that can never match the input
 ** bottom-up never explores trees inconsistent with input but wastes time exploring illegal parses

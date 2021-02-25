@@ -1,0 +1,154 @@
+#+TITLE: Knowledge Representation
+#+DATE: Mon Feb 22 12:56:06 2021 
+#+STARTUP: inlineimages
+
+* knowledge engineering
+** knowledge-based agents
+** theories have to be developed for domains of interest
+** knowledge engeneering: process to construct a KB
+*** ontological engineering
+*** physical objects, actions, time, and beliefs
+* categories
+** organized into categories
+** useful to reason about objects based on their category membership, not soely on any facts known about individuals
+** categories serve to organize and simplify the KB through inheritance
+* how to rep categories
+** unary predicates... Cat(x) ro Dog(Fido)
+*** lots of limitations
+**** can say about the individuals but not the categories
+** categories as reified objects
+*** represent categories as constants
+*** create predicates to reason about the categories
+*** Member(Honda05, CAR): Vx Member(x, CAR) => Member(x, VEHICLE)
+*** difficulties:
+**** some are hard to capture with FOL
+**** generalizations are still generaliztions
+*** dealing with exceptions
+**** Vx Member(x, BIRD) A -Abnormal(x) => Flies(x)
+***** just one way to deal with exceptions
+* representing change
+** FOL makes same kind of commitment to truth that prop logic does
+** statements are always either true or false forever
+** how do we handle at one moment can be true at other can be false
+** snapshots of the world where things are true or false forever.  We just don't stay in the same situation
+* situation calculus
+** facts hold in situations, rather than eternally
+*** eg At(Agent, Boston, Now) <- Now is the situation
+** set of axioms to model the domain of change
+*** states of the world are modeled at situations
+*** linked via result statements
+*** change axioms specify what will change
+* tracking change
+** situations are connected by a result function
+** Result(a, s) is the situation that results from doing an action a in situation s
+** Result(Forward, S0) => S1
+** ex:
+[[./images/tracking-changes.png]]
+*** two possible situation in this case
+**** you have your key in Sb if you acquired them as a result of the action that got you from Sa to Sb
+***** got your key as a result of action Sa
+**** or already had key in Sa and the action that got you from Sa to Sb did not undo that fact
+***** Sa to Sb did not cause to lose keys
+* temporal representation
+** how to represent time and temporal relationship between events
+*** las year john was sad but soon he will be happy
+** place events and situations in time is important
+*** John was happy, john is happy, will be happy
+*** t1 < t2: before
+*** t1:t2: meet
+*** t1 subset t2: contains
+* beliefs
+** also hypothetical worlds. words such as :beleive, want, imagine, know create speaker's hypothetical world
+[[./images/beleif.png]]
+*** for this statement to be true, all predicates have to be true
+*** however in the actual statement, belief, does not have to be true for the statement to be true
+** how about: believing(Speaker, Eating(Mary, Britishfood)) arg of a predicate cannot be a predicate, must be a term
+*** not a FOL
+** solution:
+*** introduce an operator, called believes, that takes two args, one for believer, and one arg (FOL) for believed prop
+*** modal operators: believe, want, imagine, know
+*** modal logic: is a logic augmented with modal operators
+* search vs planning
+[[./images/svp.png]]
+** search based agent not a good idea for this type of problem
+*** humans now grocery store for milk/banana and hardware store for drill
+** planning:
+*** find a sequence of actions that achieves a goal when performed in a given state
+*** how different from problem-solving via search
+**** state, goals, and actions use representatiosn in some formal language (eg FOL)
+*** we can look inside actions
+**** with search, actions defined only by state transitions
+**** with planning describe actions by:
+***** preconditions: what must be true before an action can be performed
+***** effects (postconditions): what must be true (what has changed) after action is performed
+**** allows planning system to reason about interactions between different actions
+*** another difference: we can consider actions in any order
+**** can add steps incrementally regardless of their final position in the sequence
+*** back to grocery store example
+[[./images/grocery.png]]
+**** once you have a plan the agent can decide the order
+***** make important decision first and reduce the branching factor for later choices
+***** constrians the search space
+** language of planning problem
+*** STRIPS language: Stanford Research Institute Problem Solver
+*** PDDL: Planning Domain Definition Language
+*** STRIPS slighly more restricted than PDDL
+**** STRIPS preconditions and goals cannot contain negative literals
+** PDDL representation
+*** states are represented by a conjunction of positive literals (grounded)
+**** literals have to be grounded and function free
+***** closed-world assumption: anything unspecified is assumed false
+**** Grounded = variable free: has to be substituted by a constant
+***** At(x,y) is not grounded
+***** At(P1, SFO) is grounded
+***** At(Father(Brian), Shanghai) (Not function free) -> Father(Brian)
+*** goals: represented as conjunction of literals (+ or -) that may contain variables
+**** goal is a partial description of a state
+***** can use negation, variables, or functions
+***** eg flying goal: At(p, SFO) A Plane(p)
+****** the above goal is to have any plane at SFO
+*** action descriptions: alpha(p1, ... pk)
+**** action name
+**** variables used in the scheme
+**** preconditions: conjunction of positive or negative literals
+***** tells under what situation the action can happen
+**** effect: conjunction of literals (+ or -) describing how the state changes when the action is executed
+***** + literals: add list, add the represented state as a result
+***** - literals: delete list, delete represented state as a result
+**** only specifies the result of an action in what changes; everything that stays the same is left unmentioned
+*** Example:
+[[./images/ex1.png]]
+**** p needs to be a plane
+**** from/to is an airport
+**** from is departing airport -> current state
+**** semantics: how actions affect the state
+**** an action is applicable in any state taht satisfies the precondidtions; otherwise, the action has no effect
+**** an action, a, can be executed in state, s, if s entails the precondition of a
+***** s |= a
+****** for every state s where s is true, then precondition a is also true
+** semantics of PDDL: applicable actions
+[[./images/ex2.png]]
+** Example:
+[[./images/ex3.png]]
+*** p/P1, from/JFK
+*** to/SFO
+*** apply action since s1 |= At(P1, JFK) A Plane(P1) A At(JFK) A Airport(SFO)
+**** entailment exists so action is applicable in this state
+*** s2 = At(P1, SFO) A At(P2, SFO) A Plane(P1) A Plane(P2) A Airport(JFK) A Airport(SFO)
+** another example:
+[[./images/ex4.png]]
+*** once picks up x, holding(x) true
+** planning as state-space search
+*** search the space of states using action schemata
+*** since actions are defined both in terms of preconditions and effects, we can search in both directions
+**** two methods:
+1. forward state-space search: start in initial state; consider action sequences until goal is reached
+2. backward state-space search: start from goal state; consider action sequences until initial state is reached
+** progression planning
+*** forward search
+**** determine whcih operators apply using preconditions
+**** use add/delete lists to compute new state
+**** main problem: often have huge search space because of large branching factor
+** regression planning
+*** advantage is that it allows us to consider only relevant actions
+*** more complicated because we have to achieve a conjunction of goals (one alone is easy)
