@@ -1,0 +1,15 @@
+#+TITLE: Cnf Resolution
+#+STARTUP: inlineimages
+
+* CNF
+** A v something ^ B V something
+** it is the conjunction of or clauses
+** A is in CNF since A v F ^ T or A v T ^ F
+** A v B is CNF since (A V B) ^ T
+* convert to CNF
+* A -> B
+** -A V B
+* Vx A(x)->B(x)
+** Vx -A(x) V B(x)
+** drop the universal quantifier
+** -A(x) V B(x)

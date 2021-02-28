@@ -1,0 +1,8 @@
+#+TITLE: Pddl Graphplan
+#+STARTUP: inlineimages
+
+* PDDL
+** action
+*** precondition
+*** effect
+** preconditions and effects are a series of predicates

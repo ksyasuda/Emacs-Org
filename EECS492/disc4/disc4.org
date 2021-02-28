@@ -1,0 +1,21 @@
+#+TITLE: Discussion3
+#+DATE: Sun Feb 28 13:45:46 2021 
+#+STARTUP: inlineimages 
+
+[[./images/proplogic.png]]
+* resolution refutation
+** take the negation of the goal#+
+** follow the resolution rules
+*** in the end, if empty set, resolution returns true -> resolve goal
+*** if something in set, did not resolve the goal
+* unification
+** we want to replace a variable with a specific value/amount so the KB can be more specific
+[[./images/unification.png]]
+* forward chaining
+** starts from the known facts
+*** put known facts into the 'agenda'
+** loop through the agenda
+*** reduce the counter to check if we can get new knowledge
+*** also usin infer table to avaoid repeated inferences
+** ex
+[[./images/fc.png]]

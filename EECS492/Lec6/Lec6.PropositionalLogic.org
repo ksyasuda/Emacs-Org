@@ -51,6 +51,7 @@
 ** means follow logically
 ** sentence alpha entails beta: a |= b
 *** if and only if in every model in which alpha is true, beta is also true
+**** everywhere that a is true, b is also true
 ** KB (Knowledge Base) entails sentence alpha: KB |= alpha
 *** if and only if alpha is true in all models where KB is true
 ** KB containing "the Giants won and the Reds won" entails "the Giants won or the Reds won"
