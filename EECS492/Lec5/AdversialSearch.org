@@ -25,6 +25,12 @@
 ***** west and queensland need red 
 ****** can use degree to choose
 ****** since the one on the right has the ability to affect others, we choose that one in the case of a tie
+* Most constrained variable
+** choose varaible with the fewest legal values:
+*** minimum remaining values = MRV
+** what if there is a tie?
+*** degree heuristic
+**** choose the variable with the most constraints on remaining variables
 * Least constraining value
 ** given a variable, how to choose which to assign first
 ** what color to assign to the next state eg (blue or red)

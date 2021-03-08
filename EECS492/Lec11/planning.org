@@ -1,2 +1,106 @@
 #+TITLE: Planning
 #+DATE: Tue Feb 23 18:03:05 2021 
+
+* PDDL representation for planning language
+** states are represented by conjunction of positive literals (grounded)
+*** literals have to be grounded and functions free predicates only applied to constant symbols
+*** e.g. initial state of Grocery Shopping example:
+**** At(Home) ^ Sells(HWS, Drills) ^ Sells(SM, Milk)
+*** closed-world assumption: anything unspecified is assumed false
+* Goal
+** represented as conjunction of literals (positive or negative) that may contain variables
+*** goal is a partial description of a state
+**** can use negation, variables, or functions
+*** e.g. flying goal: At(p, SFO) ^ Plane(p)
+*** The above goal is to have any plane at SFO
+* Operators
+** actions
+[[./images/pddl-operator.png]]
+** Current state: At(P1, JFK) ^ At(P2, SFO) ^ Plance(P1) ^ Plance(P2) ^ Airport(JFK) ^ Airport(SFO)
+* GraphPlan
+** propositional planer
+*** simple: no variables (no substitution)
+*** bigger: if you have six blocks, you need 36 propositions to represent all On(x,y) assertions
+** general procedure
+1. Make a plan graph of depth k
+2. search for solution
+3. if success; return a plan
+4. else increase the depth: k = k + 1
+5. back to step 1 and repeat
+* Plan Depth
+[[./images/plandepth.png]]
+** can do parallell actions at each point
+** partial order
+*** at planning time, don't have to specify which (B or C) to do first
+* plan graph
+[[./images/plangraph.png]]
+** odd numbered levels are actions
+*** 5 levels, 2 steps becaue 2 actions steps
+** Blue line is persistent action (no action is performed so state stays the same)
+** same things applied at each level (preconditions -> postconditions)
+** even proposition level, odd = action levels
+* Making the plan graph
+** start with the initial condition (each as a dot)
+** add actions at the next level whose preconditions are satisfied by the initial state
+** add all the effects of the actions to the next level
+** add maintenance actions (lines across for no action)
+** when time to grow graph, repeat the same process starting from the next level
+* searching for solution
+** if all literals in the goal appears at the deepest level and NOT MUTEX, then search for a solution for each subgoal at level i
+*** for each subgoal at level i
+**** choose an action at level i-1 to achieve it
+**** if it's mutex with another action, Fail (backtrack to find a different way to achieve the sub-goal)
+**** Basically we want to find a subset of actions at level i-1 that will satisfy the subgoal and not mutex
+*** repeat for preconditions for selected actions at level i-2
+* Mutex actions
+** mutually exclusive actions: actions that cannot both be done on the same step: they cannot be done in parallel
+** draw arcs between actions that cannot be done in parallel -> exists a mutex
+** two action instances at level i are mutex if:
+*** inconsistent effects: effect of one action if the negation of the effect of another action
+**** E(a) = P, E(b) = -P would be mutex with inconsistent effects
+*** interference: one action deletes the precondition of the other
+*** competing needs: the actions have preconditions that are mutex at level i-1
+**** if the preconditions of two actions are mutex, then there is competing needs and a mutex exists
+* Mutex Propositions
+** two props at level i are mutex if:
+*** Negation: they are negations of one another
+*** Inconsistent support: all ways of achieving the propositions at level i-1 are pairwise mutex
+** draw an arc between propositions to show a mutex
+* birthday dinner example
+[[./images/ex1.png]]
+** initial state, garb, clean, quiet
+** find actions where preconditions are sat
+*** clean->cook, quiet->wrap, garb->carrry, dolly
+*** all actions available
+** add effects of all the actions
+*** cook->dinner, wrap->present, carry->-garb, -clean, dolly->-garb, -quiet
+** check for mutexes at depth 1
+*** inital state will have no mutex
+*** level 1 mutex on actions:
+**** clean noop and carry are inconsistent effects
+**** garb noop and carry/dolly inconsistent effects
+**** quiet nop and dolly inconsistent effects
+**** carry and cook interfere with each other since carry->-clean but cook needs clean
+**** wrap and dolly interference since precondition of wrap is quiet and dolly->-quiet
+**** carry and dolly interference since precondition of carry is garb and dolly->-garb
+*** level 2 mutexes on propositions in layer 2
+**** every prop is mutex with its negation
+**** inconsistent support garb and -clean
+***** garb->garb, carry->-clean
+****** garb noop and carry are mutex so garb/-clean is inconsistent
+*** checking the goal:
+**** could the goal conceivably be true
+**** layer 2 contains the goal, so we could possibly find a plan
+*** searching for goal
+[[./images/ex2.png]]
+**** start looking for a plan by finding a way to make not garbage true
+***** use the carry action to make -garb true
+**** to make dinner true, only way we can, with the cook action
+**** since cook and carry are mutex, we cannot do them on the same step
+**** no mutex between cook and dolly so dinner is satisfied
+**** not need present to be true
+***** only with wrap
+***** again have problem since wrap and dolly have a mutex, we fail completely
+***** since there is no way to satisfy present, we cannot solve the 3 subgoals
+**** need to expand the graph to depth 2
+***** add another 2 layers to the plan graph (actions and propositions)
