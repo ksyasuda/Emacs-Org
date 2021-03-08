@@ -61,6 +61,8 @@
 **** stochastic beam search: choose best k successors randomly, e.g. prob of selecting each successor proportional to its value
 ***** leads to genetic algorithm
 ****** picking k successors randomly
+** LBS Example
+[[./images/lbsex.png]]
 * genetic algorithm
 ** variation of the sochasitc beam search
 ** population: start with k randomly generated states
@@ -106,6 +108,14 @@
 ** disadvantages:
 *** incomplete
 *** not optimal
+* Varieties of constraints
+** unary constraints involve a single variable
+*** eg SA != green
+** Binary constraints invole a pair of vars
+*** eg SA != WA
+** Higher-order constraints involve 3 or more vars
+*** eg cryptarithmetic column constraints
+** preferences (soft constraints) eg red is better than green, often representable by a cost for each varibale assignment -> constrained optimization problem
 * Constraint satisfaction problems
 ** standard search problem:
 *** state is a black box

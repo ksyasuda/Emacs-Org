@@ -1,0 +1,23 @@
+#+TITLE: Midterm Topics
+
+* Topics/Concpets
+** PEAS
+** how to define intelligent agent
+* Search
+** compare and contrast strategies
+** A* search, what makes it optimal
+*** what is requirement of heuristic func to make it optimal
+* constraint staisfaction
+** heuristics and techniques to improve efficiency
+* logic prop logic
+** prove entailment and validity
+* FOL
+** make FOL statements given predicates
+** unification
+** resolution in FOL
+** backward chaining in prolog
+* planning
+** use PDDL to define action schemas
+** GraphPLan to find simple plan
+* knowledge rep
+** representing category, situation, and beliefs
