@@ -1,0 +1,38 @@
+#+TITLE: Review
+#+DATE: Sat Mar  6 18:27:16 2021 
+
+* Topics/Concepts
+** Intelligent Agents
+*** PEAS
+*** characteristics of a task environment
+** Search
+*** compare and contrast different search strategies
+*** A* search, what makes it optimal
+** Constraint satisfaction
+** heusristics and techniquies to improve efficiency
+** Logic/propositional logic
+** definitions for the following concepts: entailment, soundness/completness, valid/satisfiable/unsatisfiable
+** proof of entailment, validity, etc
+** first order logic
+*** given an NL statement and pre-defined predicates, write staements in FOL
+*** unification
+*** resolution in FOL (convert a statement to CNF, apply resolution steps)
+** Planning
+*** use PDDL to define actions schemas
+** graph planning
+*** graph plan to find a simple plan
+*** given an initial state and a goal state, find a simple plan
+*** mutex
+** knowledge representation
+*** representing category, situation, and belifs
+* Example 1:
+[[./images/ex1.png]]
+** 1. BFS
+*** A, B, C, 
+** 2. DFS
+*** A, B, E, F
+** 3. 
+*** A; A, B, C, D, E; A, B, E, C, D, F
+** 4. 
+*** A, B, D, C, E, F
+** 5. A, B, C, E, F

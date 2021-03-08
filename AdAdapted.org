@@ -1,0 +1,36 @@
+#+TITLE: Ad Adapted
+#+DATE: Thu Feb 25 12:37:20 2021 
+
+* Kyle Yasuda, senior computer science, graduate in april this year
+* I'm a big believer in the best way to learn is by doing
+** which is why I've been working hard over the past year to improve my tech skills 
+* In the past, before each Summer, I set one big goal (among other smaller goals) that I want to accomplish before the start of the new school year
+** two years ago that was learning p5.js, which is a client-side JavaScript library for creating 2D and 3D graphics and animations
+** I mostly used it to build an implementations of games such as Flappy Bird and Chess
+* Last year though, with the covid pandemic and the insuing lockdowns it spurred, I found myself with much more time than I had anticipated
+** My original goal was to learn HTML, CSS, JavaScript, and eventually React.js to build a blog
+** But I was able to accomplish so much more
+** I rebuilt my blog twice 
+*** the frist time was after I found Gatsby.js, which is a React Framework that has GraphQL built-in along with other useful features and a large number of plugins
+**** brought all my lighthouse scores to 94 and above
+**** also converted the blog to a progressive web app
+*** the second time was converting my website to TypeScript
+** I also learned how to use backend frameworks in both Python and Node.js
+*** Where I've worked with SQLite3, and PostgreSQL databases
+*** in RESTful APIs
+** While I was working on all that, I installed Arch Linux on my old laptop and began learning how to use, maintain, and customize it
+*** There are many reasons I wanted to learn how to use Linux
+**** Some of them quickly: it's open source, it (especially Arch Linux) is highly customizable and automatable, and even though Windows (the OS I used before) has WSL2 (Windows Subsystem for Linux) I became fed up with the speed, memory usage, and the general limitations it has compared to native Linux
+*** I now have a flavor of Arch Linux installed as my operating system on my main laptop as well as my desktop PC and beleive that my productivity has gone up as a result
+**** I've become very good at using the terminal 
+**** Learned bash/Python scripting
+**** I installed tiling window manager, i3
+***** along with vim and git have greatly increased my productivity as a developer
+* Now with almost a year in retrospect, I realize that really enjoy learning and building things
+** I imagine the curiosity and excitement I get when starting a new project is similar to that of a kid in front of a kid in front of a box of legos or an author while fleshing out a story. 
+* And The classes I've chosen to take this year reflect that relization
+** All the classes I've taken or am enrolled in this year have included building User-Interfaces, mobile apps, or games as a major part of the cirriculum
+*** Additionally the projects in these classes are team-based, where I've been working on improving and gaining experience working in teams
+* Admittedly I have not done as much testing as I would have liked, and that is something that I have been working on for the past month and a half
+** I've been learning how to use jest and enzyme for React applications as well as started messing around with cypress.io recently
+* I'm looking to continue learning and developing my skills after graduation and think that I would be a great fit for this Frontend engineering position.

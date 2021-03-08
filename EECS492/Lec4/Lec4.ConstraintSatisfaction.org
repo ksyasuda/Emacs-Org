@@ -7,10 +7,27 @@
 * hill climbing
 ** never goes downhill
 ** guaranteed to be incomplete
+** generate nearby successor states to the current state based on some knowledge - need heuristic function
+** pick the best of the bunch and replace the current state with that one
+** loop
+** State Space
+*** can get stuck in states that locally are the best but not globally the best
+**** it depends on where you are in the state
 * purely random walk
 ** moving to a success chosen uniformly at random from a set of successors
 ** complete but extremely inefficient
-* how to combine them to have both efficiency and completeness
+* Local Search
+** maintain only current node (not multiple paths)
+** generally move only to neighbor
+** advantages:
+*** very low memory cost
+*** can often solve large continuous problems
+**** eg. parameter search for deep learning problems
+***** parameters to satisfy some objective function
+* hill climbing vs purley random walk
+** hill: never goes downhill, guraanted to be incomplete 
+** random: moving to a success or chosen uniformly at random from a set of successors = complete but ineffeicient
+** how to combine them?
 * simulated annealing
 ** have a schedule that maps time to temperature
 *** temp starts high, gradually lowers down
