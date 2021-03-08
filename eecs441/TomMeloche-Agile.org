@@ -1,0 +1,99 @@
+#+TITLE: Tom Meloche Agile
+#+DATE: Mon Mar  8 16:31:52 2021 
+
+* Education
+** high school chemistry teacher in the Netherlands
+** teaches students how to build a team
+*** don't want to build a team of friends and stuff, want a cross-functional team
+*** team you will study with all year
+**** make sure that each team has someone who is good at math
+**** make sure that someone is good at teaching
+**** need to build the best teams
+***** says you guys have to build these teams because I am not going to teach you chemistry
+***** each team must do it themselves
+****** teacher gives the goal and the materials necessary to pass the state exam
+*** teaches them how to break down work into small parts
+**** how to build a plan for how to learn chemistry
+**** track the work
+**** only work on one thing at a time as a group
+**** when done, put in the done column and that is the only time where the teacher might quiz them on the knowledge they said they learned
+**** have all the resources they need including the teacher available for any questions
+*** checks up on the teams once a week
+**** if any one person can't anwer the question, then the thing marked as done will be not done since all have to be able to demonstrate progress
+***** teacher must know that they made progress
+*** his class outperforms every other class in the country in the national chemisty exam
+** why does it work so well and why do so few other teachers copy him
+* Parties
+* Building Software: Waterfall Model
+** write every idea of features
+*** sort them, throw a few away
+**** call them requirements
+** spend some time doing design
+** then development is divided amongst the team
+*** everyone goes off to code all the little pieces
+** later down integrate all the pieces together
+*** may have to go back, redesign, and stuff
+** testing
+** deployment
+** caused 80% of all projects to fail in substantial ways
+** software projects over 50M dollars or 500 people failed 100% of the time
+** why does the waterfall cycle fail so frequently
+** why does this cause so much failure (as high as 80%)?
+*** becomes too late in the progress while testing to make major modifications
+*** requirements change, customers desires change also
+*** no flexibility to make modifications
+*** we are wrong a lot about almost everything
+** why if over 50M dollars or over 500 people, do people still do this method?
+* Reality 101
+** 60%-90% of ideas do not improve the metrics they were intended to improve
+** 1/3 of ideas created a statistically significant positive change.  1/3 nothing, 1/3 bad
+* How to fix waterfall
+** start on something new
+*** don't work on something with 100k lines of code already
+** incorporate feedback into the process
+*** if a requirement is going to be bad, have a way to figure that out early for very little money
+*** feedback should come from users
+** ability to respond to changes quikcly and ability to communicate throughout the team
+*** commit a small amount of time like a week to actually build something and show progress
+** cycle through the first couple of steps of waterfall to make the requirements better first
+*** if requirements are so important, why don't we do it all eht time
+*** if design is so important, why don't we do it all the time
+** continuous integration on every commit
+*** write tests before the function
+** test-driven development
+** pair programming
+** do all the things that make things better, all the time
+* general fix it approach
+** small amounts of time per piece
+*** usually 2 weeks
+** every day, do a standup and give feedback
+** sprint planning, sprint review
+** discipline, structure, and process
+* Agile in General
+** take a little piece
+** work until it is done
+** make it easy to change (build quality in)
+** see if it is what you really wanted
+** repeat forever
+** we are wrong a lot and we need to detect features that are wrong or bad early
+* Magic Powers
+** pair or mob work
+** write tests before code (TDD)
+*** test driven development
+** check in automated tests with the code
+** just these things, code has much more ability to respond to change
+** one customer was spending 90Mil on manually testing in India
+*** 100s of Millions of lines of code that needed to be manually tested every time
+*** 9k software developers that could have been done better with a few hundred
+* Just because Agile is out there, doesn't mean that everyone is doing Agile
+** read the scrum guide and pass the test on scrum, nobody will be doing what it says on the guide
+* at a bank, late in an Agile project
+** customer wants to add a new feature
+*** if had been told at the beginning would have been almost free
+*** now 6 weeks and $150K
+** Facebook
+*** how long would it take for Facebook to integrate the feature
+**** 15 minutes
+** how long does it take to put a small correct change into production
+*** skip time
+* can't do agile on an already built system becuase that system had not been engineered for change
