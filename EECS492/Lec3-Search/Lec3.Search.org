@@ -1,6 +1,19 @@
 #+TITLE: Lec3 Search
 
 * Search problems
+* Generalized Tree Search
+** start by adding the initial state to the frontier
+** Loop
+1. if the frontier is empty, then fail
+2. otherwise choose a leaf node and remove it from the frontier
+3. if it is a goal state then return the corresponding solution
+4. otherwise, expand the chosen node (generate its children) and add the resulting nodes to the frontier
+*** goal check happens before expansion
+** repeated states allowed
+* Graph-search algorithm
+** maintaines a list of expaned (visited) nodes for lchecking repeated states
+** explored set: remembers eery expande node
+** newly generated nodes that match previously genrated nodes in the explored set or the frontier can sometimes be discareded instead of being added to the frontier depending on the search strategies
 * problem formulation
 ** initial state
 ** successor function
