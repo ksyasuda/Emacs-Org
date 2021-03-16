@@ -1,0 +1,100 @@
+#+TITLE: 12 Uncertainty
+
+* Example: dental diagnosis
+** goal: build a dental diagnosis system with FOL
+[[./images/ex1.png]]
+* Limitations of FOL:
+** most domains don't have complete FOL theories
+** developing a complete rule set would be an enormous undertaking
+** we don't usually have a complete state description (you can't run every medical test on a patient)
+** sometimes you need to know the most likely possibility quickly - a full analysis is slow
+* Probability Theory
+** knowledge can often be characterized in terms of degrees of belief, which reflect our uncertainty about a situation
+*** differs from logic agent (who believes each sentence either true or false)
+** prob theory is well-developed area of mathematics that provides us with formal tools to characterize and measure degrees of belief
+** a probability represents uncertainty using a numerical scale between 0 and 1
+*** 0 represents unequivocal belief that a statement is false
+*** 1 represents unequivocal belief that a statement is true
+*** 0.8 represents an 80% degree of belief that a statement is true
+* Principle of maximum expected utility
+** utility: term used in decision theory to describe the desirability of a state
+*** expected utility of an action:
+[[./images/eutility.png]]
+** MEU: rational agent should choose the action that maximizes the agent's expected utility
+*** action = arg max EU (a | e)
+** formalizes the general notion that the agent should "do the right thing"
+* begin with set Omega - the sample space
+** ex. 6 possible rolls of a fair die
+** 6 possible points/possible world/atomic events
+[[./images/bprob.png]]
+* Basic Prob
+** 0 <= P(a) <= 1
+** P(true) = 1
+** P(a or b) = P(a) + P(b) - P(a and b)
+*** double counting
+* Random Variables
+** can be thought of as referring to a "part" of the world whose status is unknown
+** each random variable has domain of values
+*** Cavity might be <true, false>
+*** Weather might be <sunny, rainy, cloudy, snowy>
+** random vaiable's domain can be discrete (as above) or continuous (height, temperature, etc)
+* Prior probability
+** also called unconditional
+** corresponds to belief prior to arrival to any new evidence
+** P(Cavity = true) = 0.1
+** P(Weather = sunny) = 0.72
+** P(6.5' < Height < 7') = 0.001
+** Prior probability distribution
+*** gives values for all possible assignments of P
+**** ex. <bold>P(Weather) = <.72, .1, .08, .1> (normalized, sums to 1)
+***** corresponding to <sunny, rainy, cloudy, snowy> probabilities
+** pay attention to difference in notation between P vs <bold>P
+* Joint probability
+** joint probability distribution
+*** defined over a set of random variables
+*** gives probability of any value assignment to the random variables
+** P(Weather, Cavity) = 2x4 matrix of values
+[[./images/jointp.png]]
+* Conditional probability
+** corresponds to belief after arrival of any new evidence
+** P(cavity|toothace) = .8
+** Contrast with P(cavity) = .1
+** new evidence may be irrelevant, allowing simplification
+*** P(cavity|toothace, sunny) = P(cavity|toothache) = .8
+*** P(cavity|toothace, cavity) = 1
+** Probability Rules (Chaining and such)
+[[./images/condprob.png]]
+* Full Joint Probability
+** we use following random varss to rep a possible world
+** Cavity: &not;cavity and cavity
+** Toothache: &not;toothace &and; toothace
+** Catch: &not;catch &and; catch
+** What is P(Cavity, Toothace, Catch)?
+*** since all variables have 2 possible assignments, the full joint probability will have 8 possible outcomes
+[[./images/table1.png]] 
+*** We can now answer any questions related to these 3 random variables
+** Inference by enumeration
+* Inference using the full joint distribution
+[[./images/table1.png]] 
+** inference by enumeration: for any prop, p, sum the atomic events where p is true
+** P(toothace) = .108 + .012 + .016 + .64 = .2
+** P(cavity &or; toothache) = ?
+*** P(a &or; b) &equiv; P(a) + P(b) - P(a &and; b)
+*** sum all the numbers that apply and = .28
+* Marginilization
+** means summing out basicaly
+** given any set of variables Y and Z: P(Y) = sigma zinZ P(Y, z)
+* Normalization
+** P(&not;cavity|toothache) = P(&not;cavity^toothache)/P(toothache)
+** P(cavity|toothache) = P(cavity^toothache)/P(toothache)
+** P(toothache) is given so the denominator will always be the same
+*** &not;cavity and cavity must also add up to 1
+*** as long as we know the numerator, we can redistribute over the entire mass of 1 to give us the probabilities
+[[./images/norm.png]]
+* Bayes Rule
+[[./images/bayes.png]]
+** patient comes in with a headache.  They're worried becuase they heard H1N1 causes a headache in 9/10 cases.  Should they be worried?
+*** intuitive answer: No! headaches happen all the time
+*** formal answer: use bayes rule to do the math
+**** let h = patient has a headache, P(h) = .1
+**** let f = patient has swine flu, P(f) = .0001
