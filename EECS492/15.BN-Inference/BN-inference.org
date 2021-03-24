@@ -1,0 +1,110 @@
+#+TITLE: Bn Inference
+
+* Bayesian Belief Nets
+** rep a full-joint distribution over the vaiables more compactly with a smaller number of parameters
+** use conditional independence assumptions to reduce the number of params
+* procedure to determine independence
+** draw ancestral graph
+1. construct "ancestral graph" of all variables mentioned in the probability expression.  This is a reduced version of the original net, consisting only of the variables mentioned and all of their ancestors (parents, parents' parents, etc.)
+2. "Moralize" the ancestral graph by "marrying" the parents.
+   a. for each pair of variables with a common child, draw an undirected edge (line between them)  (if a variable has more than two parents, draw lines between every pair of parents)
+3. "Disorient" the graph by replacing the directed edges (arrows) with undirected eges (lines) 
+4. delete the givens and their edges
+   a. if the indep question had any given variables, erase those variables from the graph and erase all of their connections
+5. Read the answers off the graph
+   a. if the variables are disconnected in this graph, they are guaranteed to be independent
+   b. if the variables are connected in the graph, they are not guaranteed to be independent
+**** "are connected" means "have a path between them"
+***** path X-Y-Z, X and Z are considered to be connected, even if there's no edge between them
+*** if one or both of the variables are missing (because they were givens, and were therefore deleted), they are independent
+*** Example:
+[[./images/indep.png]]
+**** Answer: No, A and B are connected in the final graph, so they are not guaranteed to be conditionally independent given D and F
+***** we cannot say they are conditionally independent
+***** if they are disconnected then they are guaranteed to be conditionally independent
+* BN Representation Summary
+** Bayes nets compactly encode joint distributions
+** Guaranteed independence of distributions can be deduced from BN graph stucture
+** D-separation gives precise conditional independence from graph alone
+* what does marginally independent mean
+** if they appear by themselves without any other variable then they are independent
+* Inference using BN
+** We are interested in solving various inference tasks:
+*** Diagnostic task. (from effect to cause)
+**** P(Burglary | JohnCalls = true)
+*** Prediction task. (from cause to effect)
+**** P(JohnCalls | Burglary = true)
+*** Other probabilistic queries (queries on joint distributios)
+**** P(JohnCalls)
+** Main Issue: can we take advantage of conditional independence for the probabilistic inference
+** Inference by enumeration
+* Approximate Inference
+** pracitcal solution to tackle intractability of exact inference
+** use sampling methods, Monte Carlo algs to approximate answers
+** generate random events based on probabilities in the Bayes net and then do counting
+** with enough sampeles, it can get clsoe to the true probability distribution
+* Approximate Inference using Sampling
+** why sample?
+*** inference: getting a sample is faster than computing the right answer
+** basic idea:
+*** draw N samples from a sampling distribution S
+*** compute an approximate posterior probability
+*** show this converges to the true probability P
+* Sampling Basics
+** Example:
+[[./images/ex1.png]]
+1. Get sample u from uniform distribution over [0, 1)
+   a. eg random() in python
+2. convert this sample u into an outome for the given distribution by having each outcome associaated with a sub-interval of [0, 1) with sub-interval size equal to the probability of the outcome
+   a. if 0 <= u < 0.6 -> C = red
+   b. .6 <= u < .7 -> C = green
+   c. .7 <= u < 1 -> C = blue
+*** More samples = closer to true probability
+* Sampling in Bayes' Nets
+** Prior Sampling
+*** ignore evidence. Sample from the joint probability
+*** do inference by counting the right samples
+[[./images/priorsampling.png]]
+[[./images/sol1.png]]
+** Rejection Sampling
+*** Want P(C | +s)
+*** Tally C outcomes, but ignore (reject) samples which don't have S=+s
+** Likelihood Weighting
+*** problem with rejection sampling:
+**** if evidence is unlikely, rejects lots of samples
+**** evidence not exploited as you sample
+**** Consider P(Shape|blue)
+*** idea: fix evidence variables and sample the rest
+**** problem: sample distribution not consistent
+**** solution: weighted probability of evidence given parents
+[[./images/likelihood.png]]
+***** we only generate samples that are consistent with the evidence
+****** if evidence = blue only are about thins that are blue then
+***** Sprinkler and WegGrass = True
+***** process
+****** generate event for Cloudy
+****** don't generate event for Sprinkler cuz it's evidene
+******* add weight
+******* weight = given parent cloudy = True, probability for evidence = True
+****** genreate event for r
+****** WetGrass is evidence so have to look at weights
+***** likelihood weighting good
+****** taken evidence into account as we generate the sample
+******* R's value will get picked based on the evidence values of S. W
+****** more of our samples will reflect the state of the world suggested by the evidence
+***** bad
+****** evidence influences the choice of downstream variables, but not upstream ones (C isn't more likely to get a value matching the evidence)
+****** we would like to consider evidence when we sample every variable
+******* gibbs sampling
+** Gibbs Sampling
+*** procedure: Keep track of a full instantiation
+**** start with arbitrary instantiation consistent with the evidence
+**** sample one variable (non-evidence) at a time, conditioned on all the rest, but keep evidence fixed
+**** keep repeating this for a long time
+*** property: in the limit of repeating this infinetly many times the resulting sample is coming from the correct distribution
+*** rationale: both upstream and downstream variables condition on evidence
+*** a special case of Marko Chain Monte Carlo (MCMC) algorithms
+*** Efficient Resampling of One Variable
+**** many things cancel out - only CPTs with S remain
+**** more generally: only CTPs that have resampled variable need to be considreed, and joined together
+* Bayes' Net Sampling Summary

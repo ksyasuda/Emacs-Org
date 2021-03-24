@@ -1,0 +1,85 @@
+#+TITLE: Hidden Markov
+
+* HW 3 Problem 7 
+** You need to read the problem and appendixes carefully to understand how to apply Bernoulli Naive Bayesian classifier for text classification
+*** similar to examples covered in class (ie disease diagnosis, word sense disambiguation)
+** evaluation metrics for text classification used in this exercise: accuracy and confusion matrix
+*** in NLP class, you will learn additional metrics (precision, recall, F-measure, micor/macro averaging, etc)
+** Confusion Matrix c
+*** for each pair of classes <c1,c2> how many documents from c1 were incorrectly assigned to c2
+* Markov Model
+** similar to finite-state automata:
+*** with probabilities of transitioning from one state to another at discrete time intervals:
+*** can only be in 1 state at a given time
+**** prob distribution tells us what will be the next state
+** Elements of a Markov Model
+*** time
+**** t = {1, 2, 3, ... T}
+*** N states
+**** Q = {1, 2, 3, N}
+*** N events (corresponding to observations)
+**** O = {o1, o2, o3, on}
+***** one to one correspondence to the state
+*** initial probabilities
+**** pij = P[q1 = j]
+*** transition probabilities (first-order)
+**** aij = P[qt = j|qt-1 = i]
+* Example for Dow Jones
+[[./images/ex1.png]]
+** up = .5, down = .2, unchanged = .3
+** what is probability of 5 consecutive up days
+*** sequence = up x 5
+*** P(1,1,1,1,1)
+*** PI1 a11 a11 a11 a11 = .5 * .6^4 = .0648
+* Winter Weather Example
+[[./images/ex2.png]]
+[[./images/ex2a.png]]
+* Summary of Markov Model
+** conditional indep is assumed when computing probability of sequence of events 
+** each state is associated with only one event (output)
+** given a list of observations, it can determine exact state sequence.
+*** => state sequence not hidden
+** computing probability of a given observation is straightforward
+** given multiple Markov Models and an observation sequence, it's easy to determine the M.M most likely to have generated that data
+* Hidden Markov Model
+** for Markov models, the output symbols are the same as the states
+*** see the market is up: we're in state up
+** but in many problems, the output symbols and the states do not have a one-to-one correspondence
+*** eg. states are sentiment of the market (how people feel about the market), output symbols are market is up or down
+** Hidden Markov Model is an extension of a Markov model in which the output symbols are not the same as the states
+*** this means we don't know which state we are in
+[[./images/ex3.png]]
+**** three states again
+**** each state has an initial probability that tells the probability of seeing an event at that state
+** Example for Weather
+[[./images/ex4.png]]
+** Eleements of Hidden Markov Model
+*** Time same as in Markov
+*** N states -> same as in Markov
+*** M events/observations
+**** no correspondence to the sates
+*** initial probabilities
+*** transitioning probabilities
+*** observation probabilities
+**** probability distributions that tells us in each state, what is the probability of generating that observation
+**** bj(k)=P[ot=k|qt=j] 1 <= k <= M
+*** A = matrix of aij values, B = set of observation probabilities
+*** PI = vector of PIj values
+*** Entire Model: Phi = (A,B,PI)
+[[./images/elements.png]]
+* Three basics problems for HMMs
+** Problem 1: Evaluation
+*** given observation sequence and HMM model, how do we efficiently compute P(O|PHI)
+**** the probability of the observations sequence, given the model
+** Problem 2: Decoding
+*** given observations and a model how do we choose a corresponding state sequence that is optimal in some sence
+**** best explains the observations
+** Problem 3: Learning
+*** How do we adjust the model parameters PHI = (A,B,PI) to maximize P(O|PI)
+** Evaluation Problem
+*** given an observation sequence O and HMM PHI, compute P(O|PHI)
+*** why is this hard? sum over all possible sequences of states?
+[[./images/eval.png]]
+**** with an observation sequence, state sequence, and model
+** Forward Algorithm
+[[./images/forward.png]]

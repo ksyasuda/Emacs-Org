@@ -1,0 +1,119 @@
+#+TITLE: Bayesian Network
+
+* Independence if
+** the joint distribution factors into a product two simpler distributions
+*** another form &all;x,y : P(x|y) = P(x)
+** absolute independence is powerful but rare
+* conditional independence
+** most basic and robust form of knowledge about uncertain envs
+** X conditionally independent of Y given Z iff
+[[./images/conditional.png]]
+*** z is the evidence variable
+** chain rule:
+[[./images/chain.png]]
+** having joint distribution over N variables allows us to answer all questions involving the questions invloving those variables
+* Naive Bayes
+** alpha = normalization constant
+*** not looking at denoinator, only looking at numerator and make it so final probability adds up to 1
+* Bayes Rule
+** useful for accessing diagnostic probability from causal probability
+[[./images/brule.png]]
+* why use bayesian network
+** technique for modeling complex joint distribution using simple, local distributions (conditional probabilities) based on conditional independence assumptions
+*** often called graphical models
+**** how the variables interact locally
+*** describe how variables locally interact
+*** local interactions chain together to give global, indirect interactions
+*** reduce number of params
+**** easier to estimate based on params
+* bayesian belief nets
+** rep full joint distribution but more compactly
+** uses conditional independence assumptions to reduce the number of params
+** syntax:
+*** directed acyclic graph, one node per variable
+*** each node augmented with local conditional probability tables
+* ex: alarm problem
+[[./images/ex1.png]]
+** each node has conditional prob tables
+*** Burglary has no parent so it is a prior
+**** prior prob P(B) = there is a burglary
+*** alarm has two parents, burglary and earthquake
+**** P(A|B,E)
+***** 4 possibilities for B, E for alarm to be T
+** 2^5 = 32 - 1 = 31 params with full joint distribution
+*** - 1 because last prob can be found by doing 1 - p
+** with bayes only 10 parameters specified
+*** reduced from 31 -> 10 using conditional indep assumptions
+*** much more compact to the original 31 params
+* probabilities in BNs
+** BN implicitly encode joint distributions
+*** as a product of local conditional distributions
+** for each variable we find the local prob for the variable given the parents
+[[./images/ex2.png]]
+** = P(+cav)P(+cat|+cav)P(-tooth|+cav)
+** why is it guaranteed?
+*** chain rule (valid for all distributions)
+[[./images/ex3.png]]
+**** P(j,m,a,-b,-e)
+**** P(j|a)P(m|a)P(a|-b,-e)P(-b)P(-e)
+***** how to get full-joint prob
+****** P(j|a) = .9
+****** P(m|a) = .7
+****** P(a|-b,-e) = .001
+****** P(-b) = 1 - .001
+****** P(-e) = 1 - .002
+****** plug in numbers and get full joint probability
+* different structures
+1. determine the number of params, estimation of params
+2. causal model preferred over diagnostic model
+3. nevertheless, they all specify the same joint distribution
+* model acquisition
+** structure of the BN
+*** typically reflects causal relations (sometimes referred to as causal networks)
+*** causal structure is intuitive in many applications and is relatively easy for domain experts to define it
+** probability parameters of BN
+*** conditional distributions relate random variables and their parents
+*** complexity is much smaller than the full joint distribution
+*** it is much easier to obtain such probabilites from expert or learn them automatically from data
+[[./images/ex4.png]]
+**** without conditional independence assumptions as reflected in this network, how many params need to be estimated for full joint distribution?
+***** 2^7 - 1 = 127
+**** given conditional independence assumptions as indicated in the Bayesian network, one needs to specify conditional probability tables for each var.  how many parameters need to be estimated in total for these variables?
+***** 16 variables
+****** a = 2, b = 1, d = 1, c = 4, e = 2, f = 4, g = 2
+**** what is the formula to calculate the full joint probability based on the network
+[[./images/fulljoint.png]]
+* Indep in a BN
+** are two nodes independent given certain evidence?
+** a node is conditionally independent of its non-descendants given its parents
+*** P(X|U1,Um)
+** a node is conditionall independent of all other nodes in the network given its Markov blanket
+*** parents, children, and children's parents
+** D-separation
+*** study or criterion for deciding, from a given causal graph, whether a set X of variables is indpendent of another set Y, given a third set Z
+*** idea is to associate "dependence" with "connectedness" and "independence" with "unconnected-ness" or "separation"
+*** start with three types of triples
+**** simplest case
+**** First Type: Causal Chains
+[[./images/causalchain.png]]
+***** X and Z are not independent
+****** low pressure -> rain and rain -> traffic
+******* there is some relation
+***** X and Z are conditionally independent given Y
+[[./images/chains2.png]]
+****** since P(z|x,y) === P(z|y), given y, X and Z are conditionally independent
+******* low pressure and traffic only have influence on each other because of the rain
+**** Second Type: Common Cause
+[[./images/type2.png]]
+***** X and Z are not independent
+***** Given Y, X and Z are conditionally independent
+**** Third Type: Common Effect
+[[./images/commoneffect.png]]
+***** X and Y are independent
+****** ballgame and rain are not correlated
+***** X and Y are not independent given Z
+****** seeing traffic puts the rain and the ballgame in competition as explanation
+***** observing a common effect activates influence between possible causes
+**** The General Case
+***** in a given BN, are two variables independent (given evidence)?
+***** solution: analyze the graph
