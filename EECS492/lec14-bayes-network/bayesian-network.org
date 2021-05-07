@@ -1,4 +1,5 @@
 #+TITLE: Bayesian Network
+#+STARTUP: inlineimages
 
 * Independence if
 ** the joint distribution factors into a product two simpler distributions
